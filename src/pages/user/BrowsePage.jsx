@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+import StaffAvatar from '../../components/StaffAvatar'
 import { useBooking } from '../../context/BookingContext'
 
 function Stars({ rating }) {
@@ -59,7 +60,7 @@ export default function BrowsePage() {
             return (
               <div key={staff.id} className="card card-hover" style={{ display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', marginBottom: 16 }}>
-                  <div className="avatar" style={{ width: 60, height: 60, fontSize: 22, border: '2px solid #c9a84c', flexShrink: 0 }}>{staff.avatar}</div>
+                  <StaffAvatar staffId={staff.id} initial={staff.avatar} size={60} border />
                   <div>
                     <h3 style={{ fontWeight: 700, fontSize: 16 }}>{staff.name}</h3>
                     <p style={{ color: '#c9a84c', fontSize: 13, fontWeight: 600 }}>{staff.specialty}</p>

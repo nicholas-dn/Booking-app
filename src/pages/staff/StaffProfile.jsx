@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Sidebar from '../../components/Sidebar'
 import { useAuth } from '../../context/AuthContext'
 import { useBooking } from '../../context/BookingContext'
+
+const MAX_FILE_SIZE_MB = 5
 
 function Stars({ rating }) {
   return <span>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= Math.round(rating) ? '#c9a84c' : '#2a2a2a', fontSize: 16 }}>★</span>)}</span>
@@ -9,23 +11,73 @@ function Stars({ rating }) {
 
 export default function StaffProfile() {
   const { user } = useAuth()
-  const { getBookingsByStaff, staffList } = useBooking()
+  const { getBookingsByStaff, staffList, staffPhotos, setStaffPhoto, removeStaffPhoto } = useBooking()
   const staffData = staffList.find(s => s.id === user.id)
   const bookings = getBookingsByStaff(user.id)
+  const fileInputRef = useRef(null)
+
+  const currentPhoto = staffPhotos[user.id] || null
 
   const [form, setForm] = useState({
     name: user.name,
     email: user.email,
-    phone: '+234 800 000 0001',
+    phone: '+44 7700 000 001',
     bio: staffData?.bio || '',
     specialty: staffData?.specialty || '',
   })
   const [saved, setSaved] = useState(false)
+  const [photoError, setPhotoError] = useState('')
+  const [photoLoading, setPhotoLoading] = useState(false)
 
   function handleSave(e) {
     e.preventDefault()
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
+  }
+
+  function handlePhotoSelect(e) {
+    const file = e.target.files[0]
+    if (!file) return
+    setPhotoError('')
+
+    if (!file.type.startsWith('image/')) {
+      setPhotoError('Please select an image file (JPG, PNG, WebP, etc.)')
+      return
+    }
+    if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      setPhotoError(`Image must be under ${MAX_FILE_SIZE_MB}MB.`)
+      return
+    }
+
+    setPhotoLoading(true)
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      // Draw onto a canvas to enforce a square crop at the centre,
+      // then export at 400×400 so it always fits the circular avatar perfectly.
+      const img = new Image()
+      img.onload = () => {
+        const size = Math.min(img.width, img.height)
+        const offsetX = (img.width - size) / 2
+        const offsetY = (img.height - size) / 2
+        const canvas = document.createElement('canvas')
+        canvas.width = 400
+        canvas.height = 400
+        const ctx = canvas.getContext('2d')
+        ctx.drawImage(img, offsetX, offsetY, size, size, 0, 0, 400, 400)
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85)
+        setStaffPhoto(user.id, dataUrl)
+        setPhotoLoading(false)
+      }
+      img.src = ev.target.result
+    }
+    reader.readAsDataURL(file)
+    // Reset input so the same file can be re-selected after delete
+    e.target.value = ''
+  }
+
+  function handleRemovePhoto() {
+    removeStaffPhoto(user.id)
+    setPhotoError('')
   }
 
   const completed = bookings.filter(b => b.status === 'completed')
@@ -41,9 +93,52 @@ export default function StaffProfile() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, maxWidth: 900 }}>
+
           {/* Profile overview */}
           <div className="card" style={{ gridColumn: '1 / -1', display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-            <div className="avatar" style={{ width: 80, height: 80, fontSize: 30, border: '3px solid #c9a84c' }}>{user.avatar}</div>
+
+            {/* Photo upload section */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+              {/* Avatar circle */}
+              <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: '3px solid #c9a84c', flexShrink: 0, background: '#2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                {photoLoading ? (
+                  <span style={{ color: '#c9a84c', fontSize: 13 }}>...</span>
+                ) : currentPhoto ? (
+                  <img src={currentPhoto} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  <span style={{ fontSize: 36, fontWeight: 700, color: '#c9a84c' }}>{user.avatar}</span>
+                )}
+              </div>
+
+              {/* Upload / Remove buttons */}
+              <div style={{ display: 'flex', gap: 6 }}>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  style={{ fontSize: 12, padding: '6px 12px', borderRadius: 7, border: '1px solid #c9a84c', background: 'transparent', color: '#c9a84c', cursor: 'pointer', fontWeight: 600 }}>
+                  {currentPhoto ? '🔄 Change' : '📷 Upload'}
+                </button>
+                {currentPhoto && (
+                  <button
+                    onClick={handleRemovePhoto}
+                    style={{ fontSize: 12, padding: '6px 12px', borderRadius: 7, border: '1px solid #ef4444', background: 'transparent', color: '#ef4444', cursor: 'pointer', fontWeight: 600 }}>
+                    🗑 Remove
+                  </button>
+                )}
+              </div>
+
+              {/* Hidden file input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handlePhotoSelect}
+              />
+
+              {photoError && <p style={{ color: '#ef4444', fontSize: 12, textAlign: 'center', maxWidth: 140 }}>{photoError}</p>}
+              <p style={{ color: '#6b7280', fontSize: 11, textAlign: 'center', maxWidth: 120 }}>Square image · Max {MAX_FILE_SIZE_MB}MB · Auto-cropped to fit</p>
+            </div>
+
             <div style={{ flex: 1 }}>
               <h2 style={{ fontSize: 22, fontWeight: 800 }}>{user.name}</h2>
               <p style={{ color: '#c9a84c', fontWeight: 600, marginTop: 4 }}>{staffData?.specialty || 'Stylist'}</p>
@@ -53,7 +148,11 @@ export default function StaffProfile() {
                   <span style={{ color: '#9ca3af', fontSize: 13 }}>{staffData.rating} · {staffData.reviews} reviews</span>
                 </div>
               )}
+              <p style={{ color: '#9ca3af', fontSize: 13, marginTop: 8 }}>
+                Your photo is shown to clients on your profile, on the browse page, and on the homepage.
+              </p>
             </div>
+
             <div style={{ display: 'flex', gap: 28 }}>
               {[
                 ['Total Bookings', bookings.length, '#c9a84c'],

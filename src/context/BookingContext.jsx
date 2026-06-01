@@ -63,6 +63,7 @@ export function BookingProvider({ children }) {
   const [ratings, setRatings] = useState(INITIAL_RATINGS)
   const [timeSlots, setTimeSlots] = useState(INITIAL_TIME_SLOTS)
   const [suspendedIds, setSuspendedIds] = useState(INITIAL_SUSPENDED)
+  const [staffPhotos, setStaffPhotos] = useState({})
 
   function createBooking(data) {
     const newBooking = { id: bookings.length + Date.now(), ...data, status: 'pending', createdAt: new Date().toISOString().split('T')[0], rated: false }
@@ -141,15 +142,24 @@ export function BookingProvider({ children }) {
     return suspendedIds.includes(id)
   }
 
+  function setStaffPhoto(staffId, dataUrl) {
+    setStaffPhotos(prev => ({ ...prev, [staffId]: dataUrl }))
+  }
+
+  function removeStaffPhoto(staffId) {
+    setStaffPhotos(prev => { const next = { ...prev }; delete next[staffId]; return next })
+  }
+
   return (
     <BookingContext.Provider value={{
       bookings, services, staffList: STAFF_LIST, timeSlots,
-      staffAvailability, ratings, suspendedIds,
+      staffAvailability, ratings, suspendedIds, staffPhotos,
       createBooking, updateBookingStatus, getBookingsByCustomer, getBookingsByStaff,
       isStaffAvailableOnDate, getUnavailableDayName, updateStaffAvailability,
       addRating, approveRating, toggleShowOnLanding, removeRating, getRatingsByStaff, getLandingTestimonials,
       updateService, updateTimeSlots,
       toggleSuspend, isSuspended,
+      setStaffPhoto, removeStaffPhoto,
     }}>
       {children}
     </BookingContext.Provider>

@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+import StaffAvatar from '../../components/StaffAvatar'
 import { useBooking } from '../../context/BookingContext'
 
 function Stars({ rating, size = 16 }) {
@@ -47,7 +48,7 @@ export default function StaffProfilePage() {
 
         {/* Profile Header */}
         <div className="card" style={{ display: 'flex', gap: 28, alignItems: 'flex-start', marginBottom: 24, flexWrap: 'wrap' }}>
-          <div className="avatar" style={{ width: 100, height: 100, fontSize: 36, border: '3px solid #c9a84c', flexShrink: 0 }}>{staff.avatar}</div>
+          <StaffAvatar staffId={staff.id} initial={staff.avatar} size={100} border />
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
               <div>

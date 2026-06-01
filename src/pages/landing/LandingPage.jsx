@@ -33,15 +33,9 @@ function Stars({ rating }) {
   )
 }
 
-const STATS = [
-  { value: '2,400+', label: 'Bookings Made', link: '/browse' },
-  { value: '48', label: 'Expert Stylists', link: '/browse' },
-  { value: '4.8★', label: 'Average Rating', link: '/browse' },
-  { value: '98%', label: 'Satisfaction Rate', link: '/browse' },
-]
-
 export default function LandingPage() {
-  const { getLandingTestimonials, staffList } = useBooking()
+  const { getLandingTestimonials, staffPhotos } = useBooking()
+  const photo = (id) => staffPhotos[id] || null
   const testimonials = getLandingTestimonials()
 
   return (
@@ -64,18 +58,6 @@ export default function LandingPage() {
             <Link to="/browse"><button className="btn-outline" style={{ fontSize: 16, padding: '14px 32px' }}>Browse Stylists</button></Link>
           </div>
           <p style={{ color: '#6b7280', fontSize: 13, marginTop: 20 }}>No credit card required · Cancel anytime</p>
-        </div>
-
-        {/* Clickable Stats */}
-        <div style={{ display: 'flex', gap: 0, justifyContent: 'center', marginTop: 60, flexWrap: 'wrap', maxWidth: 700, margin: '60px auto 0' }}>
-          {STATS.map(({ value, label, link }, i) => (
-            <Link key={label} to={link} style={{ textDecoration: 'none', flex: '1 1 140px', padding: '20px 10px', borderRadius: 12, transition: 'background 0.2s', cursor: 'pointer' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,0.08)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#c9a84c' }}>{value}</div>
-              <div style={{ color: '#9ca3af', fontSize: 14, marginTop: 4 }}>{label}</div>
-            </Link>
-          ))}
         </div>
       </section>
 
@@ -127,7 +109,12 @@ export default function LandingPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
             {STAFF.map(s => (
               <div key={s.name} className="card card-hover" style={{ textAlign: 'center' }}>
-                <div className="avatar" style={{ width: 72, height: 72, fontSize: 28, margin: '0 auto 16px', border: '3px solid #c9a84c' }}>{s.avatar}</div>
+                <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 16px', border: '3px solid #c9a84c', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#2a2a2a', flexShrink: 0 }}>
+                  {photo(s.id)
+                    ? <img src={photo(s.id)} alt={s.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    : <span style={{ fontSize: 28, fontWeight: 700, color: '#c9a84c' }}>{s.avatar}</span>
+                  }
+                </div>
                 <h3 style={{ fontWeight: 700, marginBottom: 4 }}>{s.name}</h3>
                 <p style={{ color: '#c9a84c', fontSize: 13, fontWeight: 600, marginBottom: 10 }}>{s.specialty}</p>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 14 }}>
