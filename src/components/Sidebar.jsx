@@ -14,6 +14,8 @@ const ADMIN_LINKS = [
   { to: '/admin/bookings', label: 'All Bookings', icon: '📅' },
   { to: '/admin/staff', label: 'Staff', icon: '✂' },
   { to: '/admin/users', label: 'Customers', icon: '👥' },
+  { to: '/admin/pricing', label: 'Pricing & Slots', icon: '💷' },
+  { to: '/admin/testimonials', label: 'Reviews', icon: '⭐' },
   { to: '/admin/support', label: 'Support', icon: '💬' },
 ]
 
@@ -34,7 +36,7 @@ export default function Sidebar({ role }) {
   function handleLogout() { logout(); navigate('/') }
 
   return (
-    <div className="sidebar" style={{ display: 'flex', flexDirection: 'column', padding: '0' }}>
+    <div className="sidebar" style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={{ padding: '20px 16px', borderBottom: '1px solid #2a2a2a' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <span style={{ fontSize: 20, fontWeight: 800, color: '#c9a84c' }}>✂ TrimBook</span>
@@ -51,7 +53,7 @@ export default function Sidebar({ role }) {
         </div>
       </div>
 
-      <nav style={{ flex: 1, padding: '12px 8px' }}>
+      <nav style={{ flex: 1, padding: '12px 8px', overflowY: 'auto' }}>
         {links.map(({ to, label, icon }) => {
           const isActive = location.pathname === to
           return (
@@ -64,7 +66,8 @@ export default function Sidebar({ role }) {
       </nav>
 
       <div style={{ padding: '12px 8px', borderTop: '1px solid #2a2a2a' }}>
-        <button className="nav-link" onClick={handleLogout} style={{ width: '100%', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}>
+        <button onClick={handleLogout}
+          style={{ width: '100%', background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 8, padding: '10px 16px', color: '#ef4444', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, fontWeight: 600, fontSize: 14 }}>
           <span>🚪</span><span>Logout</span>
         </button>
       </div>

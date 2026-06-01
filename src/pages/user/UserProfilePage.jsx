@@ -48,7 +48,7 @@ export default function UserProfilePage() {
                 <div style={{ color: '#9ca3af', fontSize: 12 }}>Completed</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: 20, fontWeight: 800, color: '#c9a84c' }}>₦{totalSpent.toLocaleString()}</div>
+                <div style={{ fontSize: 20, fontWeight: 800, color: '#c9a84c' }}>£{totalSpent.toLocaleString()}</div>
                 <div style={{ color: '#9ca3af', fontSize: 12 }}>Total Spent</div>
               </div>
             </div>

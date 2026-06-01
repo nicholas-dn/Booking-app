@@ -31,7 +31,7 @@ export default function StaffDashboard() {
             { label: "Today's Appts", value: todayBookings.length, icon: '📅', color: '#c9a84c' },
             { label: 'Upcoming', value: upcoming.length, icon: '⏳', color: '#3b82f6' },
             { label: 'Completed', value: completed.length, icon: '✅', color: '#22c55e' },
-            { label: 'Total Revenue', value: `₦${revenue.toLocaleString()}`, icon: '💰', color: '#c9a84c' },
+            { label: 'Total Revenue', value: `£${revenue.toLocaleString()}`, icon: '💰', color: '#c9a84c' },
           ].map(s => (
             <div key={s.label} className="stat-card">
               <div style={{ fontSize: 24, marginBottom: 8 }}>{s.icon}</div>
@@ -64,7 +64,7 @@ export default function StaffDashboard() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <span style={{ color: '#c9a84c', fontWeight: 700 }}>₦{b.price.toLocaleString()}</span>
+                    <span style={{ color: '#c9a84c', fontWeight: 700 }}>£{b.price.toLocaleString()}</span>
                     <span className={`badge ${STATUS_COLOR[b.status]}`}>{b.status}</span>
                     {b.status === 'pending' && (
                       <button className="btn-gold" style={{ padding: '5px 12px', fontSize: 12 }} onClick={() => updateBookingStatus(b.id, 'confirmed')}>Confirm</button>

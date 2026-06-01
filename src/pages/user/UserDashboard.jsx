@@ -72,7 +72,7 @@ export default function UserDashboard() {
                     </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontWeight: 600, fontSize: 14 }}>₦{b.price.toLocaleString()}</p>
+                    <p style={{ fontWeight: 600, fontSize: 14 }}>£{b.price.toLocaleString()}</p>
                     <p style={{ color: '#9ca3af', fontSize: 12 }}>{b.date} · {b.time}</p>
                     <span className={`badge ${statusColor[b.status]}`} style={{ marginTop: 4 }}>{b.status}</span>
                   </div>

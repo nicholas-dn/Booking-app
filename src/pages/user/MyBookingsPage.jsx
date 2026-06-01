@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import RatingModal from '../../components/RatingModal'
 import { useAuth } from '../../context/AuthContext'
 import { useBooking } from '../../context/BookingContext'
 
@@ -12,6 +13,7 @@ export default function MyBookingsPage() {
   const { getBookingsByCustomer, updateBookingStatus } = useBooking()
   const [activeTab, setActiveTab] = useState('all')
   const [cancelling, setCancelling] = useState(null)
+  const [ratingBooking, setRatingBooking] = useState(null)
 
   const bookings = getBookingsByCustomer(user.id)
 
@@ -52,7 +54,6 @@ export default function MyBookingsPage() {
           ))}
         </div>
 
-        {/* Bookings List */}
         {filtered.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>📅</div>
@@ -72,28 +73,38 @@ export default function MyBookingsPage() {
                       <div style={{ display: 'flex', gap: 16, marginTop: 8, flexWrap: 'wrap' }}>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>📅 {b.date}</span>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>⏰ {b.time}</span>
-                        <span style={{ color: '#c9a84c', fontWeight: 700, fontSize: 14 }}>₦{b.price.toLocaleString()}</span>
+                        <span style={{ color: '#c9a84c', fontWeight: 700, fontSize: 14 }}>£{b.price}</span>
                       </div>
                     </div>
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10 }}>
                     <span className={`badge ${STATUS_COLOR[b.status]}`} style={{ fontSize: 12, padding: '4px 10px' }}>{b.status}</span>
-                    {(b.status === 'confirmed' || b.status === 'pending') && (
-                      cancelling === b.id ? (
-                        <div style={{ display: 'flex', gap: 8 }}>
-                          <button className="btn-danger" style={{ fontSize: 12, padding: '6px 12px' }} onClick={() => handleCancel(b.id)}>Confirm Cancel</button>
-                          <button onClick={() => setCancelling(null)} style={{ fontSize: 12, padding: '6px 12px', background: '#2a2a2a', border: 'none', borderRadius: 6, color: '#9ca3af', cursor: 'pointer' }}>Keep</button>
-                        </div>
-                      ) : (
-                        <button onClick={() => setCancelling(b.id)} style={{ fontSize: 12, padding: '6px 12px', background: 'transparent', border: '1px solid #ef4444', borderRadius: 6, color: '#ef4444', cursor: 'pointer' }}>
-                          Cancel
+                    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                      {(b.status === 'confirmed' || b.status === 'pending') && (
+                        cancelling === b.id ? (
+                          <>
+                            <button className="btn-danger" style={{ fontSize: 12, padding: '6px 12px' }} onClick={() => handleCancel(b.id)}>Confirm Cancel</button>
+                            <button onClick={() => setCancelling(null)} style={{ fontSize: 12, padding: '6px 12px', background: '#2a2a2a', border: 'none', borderRadius: 6, color: '#9ca3af', cursor: 'pointer' }}>Keep</button>
+                          </>
+                        ) : (
+                          <button onClick={() => setCancelling(b.id)} style={{ fontSize: 12, padding: '6px 12px', background: 'transparent', border: '1px solid #ef4444', borderRadius: 6, color: '#ef4444', cursor: 'pointer' }}>
+                            Cancel
+                          </button>
+                        )
+                      )}
+                      {b.status === 'completed' && !b.rated && (
+                        <button className="btn-gold" style={{ fontSize: 12, padding: '6px 14px' }} onClick={() => setRatingBooking(b)}>
+                          ⭐ Leave Review
                         </button>
-                      )
-                    )}
-                    {b.status === 'completed' && (
-                      <Link to={`/book/${b.staffId}`}><button className="btn-outline" style={{ fontSize: 12, padding: '6px 12px' }}>Rebook</button></Link>
-                    )}
+                      )}
+                      {b.status === 'completed' && b.rated && (
+                        <span style={{ fontSize: 12, color: '#22c55e' }}>✓ Reviewed</span>
+                      )}
+                      {b.status === 'completed' && (
+                        <Link to={`/book/${b.staffId}`}><button className="btn-outline" style={{ fontSize: 12, padding: '6px 12px' }}>Rebook</button></Link>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -101,6 +112,8 @@ export default function MyBookingsPage() {
           </div>
         )}
       </div>
+
+      {ratingBooking && <RatingModal booking={ratingBooking} onClose={() => setRatingBooking(null)} />}
     </div>
   )
 }

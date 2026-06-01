@@ -58,7 +58,7 @@ export default function StaffProfile() {
               {[
                 ['Total Bookings', bookings.length, '#c9a84c'],
                 ['Completed', completed.length, '#22c55e'],
-                [`₦${revenue.toLocaleString()}`, 'Earned', '#c9a84c'],
+                [`£${revenue.toLocaleString()}`, 'Earned', '#c9a84c'],
               ].map(([val, label, color]) => (
                 <div key={label} style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: 20, fontWeight: 800, color }}>{val}</div>

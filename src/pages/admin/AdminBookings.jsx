@@ -28,7 +28,7 @@ export default function AdminBookings() {
         <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <div>
             <h1 style={{ fontSize: 24, fontWeight: 800, color: '#fff' }}>All Bookings</h1>
-            <p style={{ color: '#9ca3af', marginTop: 4 }}>Total Revenue: <span style={{ color: '#c9a84c', fontWeight: 700 }}>₦{totalRevenue.toLocaleString()}</span></p>
+            <p style={{ color: '#9ca3af', marginTop: 4 }}>Total Revenue: <span style={{ color: '#c9a84c', fontWeight: 700 }}>£{totalRevenue.toLocaleString()}</span></p>
           </div>
           <input className="input-dark" placeholder="🔍  Search bookings..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: 240 }} />
         </div>
@@ -78,7 +78,7 @@ export default function AdminBookings() {
                   <td style={{ fontSize: 14 }}>{b.service}</td>
                   <td style={{ fontSize: 14, color: '#9ca3af' }}>{b.staffName}</td>
                   <td style={{ fontSize: 13, color: '#9ca3af' }}>{b.date}<br />{b.time}</td>
-                  <td style={{ fontWeight: 700, color: '#c9a84c' }}>₦{b.price.toLocaleString()}</td>
+                  <td style={{ fontWeight: 700, color: '#c9a84c' }}>£{b.price.toLocaleString()}</td>
                   <td><span className={`badge ${STATUS_COLOR[b.status]}`}>{b.status}</span></td>
                   <td>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

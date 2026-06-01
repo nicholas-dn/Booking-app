@@ -60,7 +60,7 @@ export default function StaffServices() {
                         <p style={{ color: '#9ca3af', fontSize: 12 }}>{s.duration} min · <span style={{ textTransform: 'capitalize' }}>{s.category}</span></p>
                       </div>
                     </div>
-                    <span style={{ color: '#c9a84c', fontWeight: 700 }}>₦{s.price.toLocaleString()}</span>
+                    <span style={{ color: '#c9a84c', fontWeight: 700 }}>£{s.price.toLocaleString()}</span>
                   </div>
                 )
               })}
@@ -83,7 +83,7 @@ export default function StaffServices() {
                   <span style={{ color: '#9ca3af', fontSize: 14 }}>Price range</span>
                   <span style={{ fontWeight: 700, color: '#c9a84c', fontSize: 13 }}>
                     {myServiceDetails.length > 0
-                      ? `₦${Math.min(...myServiceDetails.map(s => s.price)).toLocaleString()} – ₦${Math.max(...myServiceDetails.map(s => s.price)).toLocaleString()}`
+                      ? `£${Math.min(...myServiceDetails.map(s => s.price)).toLocaleString()} – £${Math.max(...myServiceDetails.map(s => s.price)).toLocaleString()}`
                       : '—'}
                   </span>
                 </div>
@@ -99,7 +99,7 @@ export default function StaffServices() {
                   {myServiceDetails.map(s => (
                     <div key={s.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
                       <span style={{ color: '#d1d5db' }}>{s.name}</span>
-                      <span style={{ color: '#c9a84c', fontWeight: 600 }}>₦{s.price.toLocaleString()}</span>
+                      <span style={{ color: '#c9a84c', fontWeight: 600 }}>£{s.price.toLocaleString()}</span>
                     </div>
                   ))}
                 </div>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+import { useBooking } from '../../context/BookingContext'
 
 const FEATURES = [
   { icon: '📅', title: 'Easy Booking', desc: 'Book your appointment in under 60 seconds. Choose your stylist, service, and preferred time.' },
@@ -17,15 +18,9 @@ const HOW_IT_WORKS = [
 ]
 
 const STAFF = [
-  { name: 'James Okafor', specialty: 'Master Barber', rating: 4.8, reviews: 89, avatar: 'J', tags: ['Fades', 'Designs', 'Beard'] },
-  { name: 'Amaka Nwosu', specialty: 'Senior Hairdresser', rating: 4.9, reviews: 134, avatar: 'A', tags: ['Braiding', 'Natural Hair', 'Styling'] },
-  { name: 'Chidi Eze', specialty: 'Barber', rating: 4.7, reviews: 56, avatar: 'C', tags: ['Cuts', 'Shave', 'Dreadlocks'] },
-]
-
-const TESTIMONIALS = [
-  { name: 'Tunde B.', text: "TrimBook made it so easy to find a great barber near me. I've been going to James every two weeks now!", avatar: 'T' },
-  { name: 'Ngozi A.', text: "Amaka is amazing! I found her on TrimBook and she's been doing my hair for months. The booking process is seamless.", avatar: 'N' },
-  { name: 'Emeka O.', text: "As a busy professional, I love that I can book in advance and get reminders. No more waiting in line.", avatar: 'E' },
+  { name: 'James Okafor', specialty: 'Master Barber', rating: 4.8, reviews: 89, avatar: 'J', tags: ['Fades', 'Designs', 'Beard'], id: 2 },
+  { name: 'Amaka Nwosu', specialty: 'Senior Hairdresser', rating: 4.9, reviews: 134, avatar: 'A', tags: ['Braiding', 'Natural Hair', 'Styling'], id: 3 },
+  { name: 'Chidi Eze', specialty: 'Barber', rating: 4.7, reviews: 56, avatar: 'C', tags: ['Cuts', 'Shave', 'Dreadlocks'], id: 4 },
 ]
 
 function Stars({ rating }) {
@@ -38,7 +33,17 @@ function Stars({ rating }) {
   )
 }
 
+const STATS = [
+  { value: '2,400+', label: 'Bookings Made', link: '/browse' },
+  { value: '48', label: 'Expert Stylists', link: '/browse' },
+  { value: '4.8★', label: 'Average Rating', link: '/browse' },
+  { value: '98%', label: 'Satisfaction Rate', link: '/browse' },
+]
+
 export default function LandingPage() {
+  const { getLandingTestimonials, staffList } = useBooking()
+  const testimonials = getLandingTestimonials()
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
@@ -46,14 +51,13 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{ background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1208 100%)', padding: '80px 24px', textAlign: 'center' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
-          <div className="badge badge-gold" style={{ marginBottom: 20, fontSize: 13 }}>🇳🇬 Nigeria's #1 Salon Booking Platform</div>
           <h1 style={{ fontSize: 'clamp(36px, 6vw, 64px)', fontWeight: 900, lineHeight: 1.1, marginBottom: 20, color: '#fff' }}>
             Book Your Next<br />
             <span style={{ color: '#c9a84c' }}>Perfect Look</span><br />
             In Seconds
           </h1>
           <p style={{ color: '#9ca3af', fontSize: 18, marginBottom: 36, lineHeight: 1.7 }}>
-            Connect with top barbers and hairdressers in your area. Real-time availability, instant confirmation, zero hassle.
+            Connect with top barbers and hairdressers. Real-time availability, instant confirmation, zero hassle.
           </p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/register"><button className="btn-gold" style={{ fontSize: 16, padding: '14px 32px' }}>Book Now — It's Free</button></Link>
@@ -62,13 +66,15 @@ export default function LandingPage() {
           <p style={{ color: '#6b7280', fontSize: 13, marginTop: 20 }}>No credit card required · Cancel anytime</p>
         </div>
 
-        {/* Stats */}
-        <div style={{ display: 'flex', gap: 40, justifyContent: 'center', marginTop: 60, flexWrap: 'wrap' }}>
-          {[['2,400+', 'Bookings Made'], ['48', 'Expert Stylists'], ['4.8★', 'Average Rating'], ['98%', 'Satisfaction Rate']].map(([val, label]) => (
-            <div key={label} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#c9a84c' }}>{val}</div>
-              <div style={{ color: '#9ca3af', fontSize: 14 }}>{label}</div>
-            </div>
+        {/* Clickable Stats */}
+        <div style={{ display: 'flex', gap: 0, justifyContent: 'center', marginTop: 60, flexWrap: 'wrap', maxWidth: 700, margin: '60px auto 0' }}>
+          {STATS.map(({ value, label, link }, i) => (
+            <Link key={label} to={link} style={{ textDecoration: 'none', flex: '1 1 140px', padding: '20px 10px', borderRadius: 12, transition: 'background 0.2s', cursor: 'pointer' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,0.08)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+              <div style={{ fontSize: 32, fontWeight: 800, color: '#c9a84c' }}>{value}</div>
+              <div style={{ color: '#9ca3af', fontSize: 14, marginTop: 4 }}>{label}</div>
+            </Link>
           ))}
         </div>
       </section>
@@ -99,7 +105,7 @@ export default function LandingPage() {
             <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>How It <span style={{ color: '#c9a84c' }}>Works</span></h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24 }}>
-            {HOW_IT_WORKS.map((h, i) => (
+            {HOW_IT_WORKS.map(h => (
               <div key={h.step} className="card" style={{ position: 'relative' }}>
                 <div style={{ fontSize: 48, fontWeight: 900, color: 'rgba(201,168,76,0.15)', position: 'absolute', top: 12, right: 16 }}>{h.step}</div>
                 <div style={{ color: '#c9a84c', fontWeight: 700, fontSize: 13, marginBottom: 8 }}>STEP {h.step}</div>
@@ -131,9 +137,14 @@ export default function LandingPage() {
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
                   {s.tags.map(t => <span key={t} className="badge badge-gold">{t}</span>)}
                 </div>
-                <Link to="/browse" style={{ display: 'block', marginTop: 16 }}>
-                  <button className="btn-gold" style={{ width: '100%' }}>Book Now</button>
-                </Link>
+                <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
+                  <Link to={`/staff-profile/${s.id}`} style={{ flex: 1 }}>
+                    <button className="btn-outline" style={{ width: '100%' }}>View Profile</button>
+                  </Link>
+                  <Link to={`/book/${s.id}`} style={{ flex: 1 }}>
+                    <button className="btn-gold" style={{ width: '100%' }}>Book Now</button>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
@@ -143,29 +154,31 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section style={{ padding: '80px 24px', background: '#0a0a0a' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>What Our <span style={{ color: '#c9a84c' }}>Clients Say</span></h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
-            {TESTIMONIALS.map(t => (
-              <div key={t.name} className="card">
-                <div style={{ color: '#c9a84c', fontSize: 28, marginBottom: 12 }}>"</div>
-                <p style={{ color: '#d1d5db', lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>{t.text}</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div className="avatar" style={{ width: 36, height: 36, fontSize: 14 }}>{t.avatar}</div>
-                  <div>
-                    <p style={{ fontWeight: 600, fontSize: 14 }}>{t.name}</p>
-                    <Stars rating={5} />
+      {/* Testimonials — only shown when admin has approved some */}
+      {testimonials.length > 0 && (
+        <section style={{ padding: '80px 24px', background: '#0a0a0a' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>What Our <span style={{ color: '#c9a84c' }}>Clients Say</span></h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+              {testimonials.map(t => (
+                <div key={t.id} className="card">
+                  <div style={{ color: '#c9a84c', fontSize: 28, marginBottom: 12 }}>"</div>
+                  <p style={{ color: '#d1d5db', lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>{t.comment}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div className="avatar" style={{ width: 36, height: 36, fontSize: 14 }}>{t.customerName[0]}</div>
+                    <div>
+                      <p style={{ fontWeight: 600, fontSize: 14 }}>{t.customerName}</p>
+                      <span>{[1,2,3,4,5].map(n => <span key={n} style={{ color: n <= t.rating ? '#c9a84c' : '#2a2a2a', fontSize: 13 }}>★</span>)}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA Banner */}
       <section style={{ padding: '80px 24px', background: 'linear-gradient(135deg, #1a1208 0%, #0f0f0f 100%)', textAlign: 'center' }}>

@@ -10,7 +10,7 @@ export default function BookingPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { user } = useAuth()
-  const { staffList, services, timeSlots, createBooking } = useBooking()
+  const { staffList, services, timeSlots, createBooking, isStaffAvailableOnDate, getUnavailableDayName, staffAvailability } = useBooking()
 
   const staff = staffList.find(s => s.id === Number(id))
   const staffServices = staff ? services.filter(s => staff.services.includes(s.id)) : []
@@ -19,6 +19,7 @@ export default function BookingPage() {
   const [selected, setSelected] = useState({ service: null, date: '', time: '', note: '' })
   const [submitted, setSubmitted] = useState(false)
   const [booking, setBooking] = useState(null)
+  const [availError, setAvailError] = useState('')
 
   if (!staff) return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -45,6 +46,22 @@ export default function BookingPage() {
       </div>
     </div>
   )
+
+  function handleDateChange(dateStr) {
+    setAvailError('')
+    if (!dateStr) { setSelected(p => ({ ...p, date: '', time: '' })); return }
+    if (!isStaffAvailableOnDate(staff.id, dateStr)) {
+      const dayName = getUnavailableDayName(staff.id, dateStr)
+      setAvailError(`${staff.name} does not work on ${dayName}s. Please choose a different date.`)
+      setSelected(p => ({ ...p, date: dateStr, time: '' }))
+    } else {
+      setSelected(p => ({ ...p, date: dateStr, time: '' }))
+    }
+  }
+
+  // Get working days for this staff member to show hint
+  const avail = staffAvailability[staff.id]
+  const workingDays = avail ? Object.entries(avail).filter(([, v]) => v).map(([k]) => k).join(', ') : 'All days'
 
   function handleConfirm() {
     const newBooking = createBooking({
@@ -76,7 +93,7 @@ export default function BookingPage() {
               ['With', staff.name],
               ['Date', booking.date],
               ['Time', booking.time],
-              ['Total', `₦${booking.price.toLocaleString()}`],
+              ['Total', `£${booking.price}`],
               ['Status', 'Pending Confirmation'],
             ].map(([label, val]) => (
               <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #1f1f1f', fontSize: 14 }}>
@@ -142,7 +159,7 @@ export default function BookingPage() {
                     <p style={{ fontWeight: 600, fontSize: 15 }}>{s.name}</p>
                     <p style={{ color: '#9ca3af', fontSize: 13, marginTop: 2 }}>⏱ {s.duration} min</p>
                   </div>
-                  <span style={{ color: '#c9a84c', fontWeight: 700, fontSize: 16 }}>₦{s.price.toLocaleString()}</span>
+                  <span style={{ color: '#c9a84c', fontWeight: 700, fontSize: 16 }}>£{s.price}</span>
                 </div>
               ))}
             </div>
@@ -155,13 +172,21 @@ export default function BookingPage() {
         {/* Step 1: Choose Date & Time */}
         {step === 1 && (
           <div className="card">
-            <h2 style={{ fontWeight: 700, fontSize: 18, marginBottom: 16 }}>Choose Date & Time</h2>
+            <h2 style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}>Choose Date & Time</h2>
+            <p style={{ color: '#9ca3af', fontSize: 13, marginBottom: 20 }}>
+              {staff.name} works on: <span style={{ color: '#c9a84c', fontWeight: 600 }}>{workingDays}</span>
+            </p>
             <div style={{ marginBottom: 20 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: '#d1d5db', display: 'block', marginBottom: 8 }}>Select Date</label>
               <input className="input-dark" type="date" min={today} value={selected.date}
-                onChange={e => setSelected(p => ({ ...p, date: e.target.value }))} />
+                onChange={e => handleDateChange(e.target.value)} />
+              {availError && (
+                <div style={{ marginTop: 10, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 8, padding: '10px 14px', color: '#ef4444', fontSize: 13 }}>
+                  🚫 {availError}
+                </div>
+              )}
             </div>
-            {selected.date && (
+            {selected.date && !availError && (
               <div style={{ marginBottom: 20 }}>
                 <label style={{ fontSize: 13, fontWeight: 600, color: '#d1d5db', display: 'block', marginBottom: 8 }}>Select Time</label>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: 8 }}>
@@ -187,7 +212,7 @@ export default function BookingPage() {
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn-outline" onClick={() => setStep(0)} style={{ flex: 1 }}>← Back</button>
-              <button className="btn-gold" onClick={() => setStep(2)} disabled={!selected.date || !selected.time} style={{ flex: 2, padding: '12px' }}>
+              <button className="btn-gold" onClick={() => setStep(2)} disabled={!selected.date || !selected.time || !!availError} style={{ flex: 2, padding: '12px' }}>
                 Continue →
               </button>
             </div>
@@ -205,7 +230,7 @@ export default function BookingPage() {
                 ['Duration', `${selected.service?.duration} min`],
                 ['Date', selected.date],
                 ['Time', selected.time],
-                ['Total', `₦${selected.service?.price.toLocaleString()}`],
+                ['Total', `£${selected.service?.price}`],
               ].map(([label, val]) => (
                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #1f1f1f', fontSize: 14 }}>
                   <span style={{ color: '#9ca3af' }}>{label}</span>

@@ -32,7 +32,7 @@ export default function AdminDashboard() {
             { label: 'Total Bookings', value: bookings.length, icon: '📅', color: '#c9a84c' },
             { label: "Today's Bookings", value: todayBookings.length, icon: '📆', color: '#3b82f6' },
             { label: 'Pending Review', value: pending.length, icon: '⏳', color: '#f59e0b' },
-            { label: 'Total Revenue', value: `₦${revenue.toLocaleString()}`, icon: '💰', color: '#22c55e' },
+            { label: 'Total Revenue', value: `£${revenue.toLocaleString()}`, icon: '💰', color: '#22c55e' },
             { label: 'Active Staff', value: staffList.length, icon: '✂', color: '#c9a84c' },
             { label: 'Customers', value: customers.length, icon: '👥', color: '#8b5cf6' },
           ].map(s => (
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
                         <span style={{ fontWeight: 600, fontSize: 13 }}>{s.name}</span>
-                        <span style={{ color: '#c9a84c', fontSize: 13, fontWeight: 700 }}>₦{staffRevenue.toLocaleString()}</span>
+                        <span style={{ color: '#c9a84c', fontSize: 13, fontWeight: 700 }}>£{staffRevenue.toLocaleString()}</span>
                       </div>
                       <div style={{ height: 4, background: '#2a2a2a', borderRadius: 2 }}>
                         <div style={{ height: '100%', background: '#c9a84c', borderRadius: 2, width: `${Math.min((staffBookings.length / bookings.length) * 100 * 2, 100)}%` }} />

@@ -1,11 +1,9 @@
-import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
-  const [menuOpen, setMenuOpen] = useState(false)
 
   function handleLogout() {
     logout()
@@ -22,7 +20,7 @@ export default function Navbar() {
   return (
     <nav style={{ background: '#111', borderBottom: '1px solid #2a2a2a', position: 'sticky', top: 0, zIndex: 50 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
-        <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
           <span style={{ fontSize: 22, fontWeight: 800, color: '#c9a84c' }}>✂ TrimBook</span>
         </Link>
 
@@ -33,18 +31,18 @@ export default function Navbar() {
               <Link to="/register"><button className="btn-gold" style={{ padding: '8px 18px' }}>Sign Up</button></Link>
             </>
           ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <Link to={getDashboardLink()} style={{ textDecoration: 'none' }}>
-                <button className="btn-outline" style={{ padding: '8px 18px' }}>Dashboard</button>
-              </Link>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div className="avatar" style={{ width: 36, height: 36, fontSize: 14 }}>{user.avatar}</div>
-                <div style={{ display: 'none' }}>
-                  <p style={{ fontSize: 13, fontWeight: 600 }}>{user.name}</p>
-                  <p style={{ fontSize: 11, color: '#9ca3af', textTransform: 'capitalize' }}>{user.role}</p>
-                </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="avatar" style={{ width: 36, height: 36, fontSize: 14 }}>{user.avatar}</div>
+              <div>
+                <p style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.2 }}>{user.name}</p>
+                <p style={{ fontSize: 11, color: '#9ca3af', textTransform: 'capitalize' }}>{user.role}</p>
               </div>
-              <button className="btn-danger" style={{ padding: '8px 16px', fontSize: 13 }} onClick={handleLogout}>Logout</button>
+              <Link to={getDashboardLink()}>
+                <button className="btn-outline" style={{ padding: '7px 14px', fontSize: 13 }}>Dashboard</button>
+              </Link>
+              <button className="btn-danger" style={{ padding: '8px 16px', fontSize: 13, borderRadius: 8 }} onClick={handleLogout}>
+                🚪 Logout
+              </button>
             </div>
           )}
         </div>

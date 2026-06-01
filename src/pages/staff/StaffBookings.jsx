@@ -56,7 +56,7 @@ export default function StaffBookings() {
                       <div style={{ display: 'flex', gap: 16, marginTop: 8, flexWrap: 'wrap' }}>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>📅 {b.date}</span>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>⏰ {b.time}</span>
-                        <span style={{ color: '#c9a84c', fontWeight: 700 }}>₦{b.price.toLocaleString()}</span>
+                        <span style={{ color: '#c9a84c', fontWeight: 700 }}>£{b.price.toLocaleString()}</span>
                       </div>
                     </div>
                   </div>

@@ -76,7 +76,7 @@ export default function BrowsePage() {
                   <p style={{ fontSize: 12, color: '#6b7280', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>Services</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {staffServices.slice(0, 4).map(s => (
-                      <span key={s.id} className="badge badge-gray">{s.name} · ₦{s.price.toLocaleString()}</span>
+                      <span key={s.id} className="badge badge-gray">{s.name} · £{s.price.toLocaleString()}</span>
                     ))}
                     {staffServices.length > 4 && <span className="badge badge-gray">+{staffServices.length - 4} more</span>}
                   </div>
