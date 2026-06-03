@@ -19,7 +19,7 @@ export default function StaffDashboard() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar role="staff" />
-      <div style={{ flex: 1, padding: 32, overflowY: 'auto' }}>
+      <div className="sidebar-main" style={{ flex: 1, padding: 32, overflowY: 'auto' }}>
         <div style={{ marginBottom: 28 }}>
           <h1 style={{ fontSize: 24, fontWeight: 800, color: '#fff' }}>Welcome, {user.name.split(' ')[0]} ✂</h1>
           <p style={{ color: '#9ca3af', marginTop: 4 }}>Here's your schedule overview</p>

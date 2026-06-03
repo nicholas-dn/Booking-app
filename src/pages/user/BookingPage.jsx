@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar'
 import { useAuth } from '../../context/AuthContext'
 import { useBooking } from '../../context/BookingContext'
 
-const STEPS = ['Select Service', 'Choose Time', 'Confirm']
+const STEPS = ['Select Services', 'Choose Time', 'Confirm']
 
 export default function BookingPage() {
   const { id } = useParams()
@@ -16,7 +16,7 @@ export default function BookingPage() {
   const staffServices = staff ? services.filter(s => staff.services.includes(s.id)) : []
 
   const [step, setStep] = useState(0)
-  const [selected, setSelected] = useState({ service: null, date: '', time: '', note: '' })
+  const [selected, setSelected] = useState({ services: [], date: '', time: '', note: '' })
   const [submitted, setSubmitted] = useState(false)
   const [booking, setBooking] = useState(null)
   const [availError, setAvailError] = useState('')
@@ -47,6 +47,24 @@ export default function BookingPage() {
     </div>
   )
 
+  function toggleService(svc) {
+    setSelected(p => {
+      const exists = p.services.find(s => s.id === svc.id)
+      return {
+        ...p,
+        services: exists ? p.services.filter(s => s.id !== svc.id) : [...p.services, svc],
+      }
+    })
+  }
+
+  function isSelected(svcId) {
+    return selected.services.some(s => s.id === svcId)
+  }
+
+  const totalPrice = selected.services.reduce((sum, s) => sum + s.price, 0)
+  const totalDuration = selected.services.reduce((sum, s) => sum + s.duration, 0)
+  const serviceNames = selected.services.map(s => s.name).join(', ')
+
   function handleDateChange(dateStr) {
     setAvailError('')
     if (!dateStr) { setSelected(p => ({ ...p, date: '', time: '' })); return }
@@ -59,7 +77,6 @@ export default function BookingPage() {
     }
   }
 
-  // Get working days for this staff member to show hint
   const avail = staffAvailability[staff.id]
   const workingDays = avail ? Object.entries(avail).filter(([, v]) => v).map(([k]) => k).join(', ') : 'All days'
 
@@ -69,8 +86,8 @@ export default function BookingPage() {
       customerName: user.name,
       staffId: staff.id,
       staffName: staff.name,
-      service: selected.service.name,
-      price: selected.service.price,
+      service: serviceNames,
+      price: totalPrice,
       date: selected.date,
       time: selected.time,
       note: selected.note,
@@ -89,16 +106,16 @@ export default function BookingPage() {
           <p style={{ color: '#9ca3af', marginBottom: 24 }}>Your appointment has been booked successfully.</p>
           <div style={{ background: '#111', borderRadius: 10, padding: 20, marginBottom: 24, textAlign: 'left' }}>
             {[
-              ['Service', booking.service],
+              ['Service(s)', booking.service],
               ['With', staff.name],
               ['Date', booking.date],
               ['Time', booking.time],
-              ['Total', `£${booking.price}`],
+              ['Total', `£${booking.price.toLocaleString()}`],
               ['Status', 'Pending Confirmation'],
             ].map(([label, val]) => (
-              <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #1f1f1f', fontSize: 14 }}>
-                <span style={{ color: '#9ca3af' }}>{label}</span>
-                <span style={{ fontWeight: 600, color: label === 'Total' ? '#c9a84c' : '#f5f5f5' }}>{val}</span>
+              <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #1f1f1f', fontSize: 14, gap: 12 }}>
+                <span style={{ color: '#9ca3af', flexShrink: 0 }}>{label}</span>
+                <span style={{ fontWeight: 600, color: label === 'Total' ? '#c9a84c' : '#f5f5f5', textAlign: 'right' }}>{val}</span>
               </div>
             ))}
           </div>
@@ -142,28 +159,62 @@ export default function BookingPage() {
           ))}
         </div>
 
-        {/* Step 0: Select Service */}
+        {/* Step 0: Select Services */}
         {step === 0 && (
           <div className="card">
-            <h2 style={{ fontWeight: 700, fontSize: 18, marginBottom: 16 }}>Select a Service</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {staffServices.map(s => (
-                <div key={s.id} onClick={() => setSelected(p => ({ ...p, service: s }))}
-                  style={{
-                    padding: '14px 16px', borderRadius: 10, border: '2px solid', cursor: 'pointer', transition: 'all 0.2s',
-                    borderColor: selected.service?.id === s.id ? '#c9a84c' : '#2a2a2a',
-                    background: selected.service?.id === s.id ? 'rgba(201,168,76,0.08)' : '#111',
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  }}>
-                  <div>
-                    <p style={{ fontWeight: 600, fontSize: 15 }}>{s.name}</p>
-                    <p style={{ color: '#9ca3af', fontSize: 13, marginTop: 2 }}>⏱ {s.duration} min</p>
-                  </div>
-                  <span style={{ color: '#c9a84c', fontWeight: 700, fontSize: 16 }}>£{s.price}</span>
-                </div>
-              ))}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 6 }}>
+              <h2 style={{ fontWeight: 700, fontSize: 18 }}>Select Services</h2>
+              <span style={{ fontSize: 12, color: '#9ca3af' }}>Select one or more</span>
             </div>
-            <button className="btn-gold" onClick={() => setStep(1)} disabled={!selected.service} style={{ width: '100%', marginTop: 20, padding: '12px' }}>
+            <p style={{ color: '#9ca3af', fontSize: 13, marginBottom: 16 }}>Tap to toggle a service on or off</p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {staffServices.map(s => {
+                const on = isSelected(s.id)
+                return (
+                  <div key={s.id} onClick={() => toggleService(s)}
+                    style={{
+                      padding: '14px 16px', borderRadius: 10, border: '2px solid', cursor: 'pointer', transition: 'all 0.2s',
+                      borderColor: on ? '#c9a84c' : '#2a2a2a',
+                      background: on ? 'rgba(201,168,76,0.08)' : '#111',
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <div style={{
+                        width: 22, height: 22, borderRadius: 6, border: '2px solid', flexShrink: 0,
+                        borderColor: on ? '#c9a84c' : '#4a4a4a',
+                        background: on ? '#c9a84c' : 'transparent',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 12, color: '#0f0f0f', fontWeight: 800,
+                      }}>
+                        {on ? '✓' : ''}
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: 600, fontSize: 15 }}>{s.name}</p>
+                        <p style={{ color: '#9ca3af', fontSize: 13, marginTop: 2 }}>⏱ {s.duration} min</p>
+                      </div>
+                    </div>
+                    <span style={{ color: on ? '#c9a84c' : '#9ca3af', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>£{s.price}</span>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Running total */}
+            {selected.services.length > 0 && (
+              <div style={{ marginTop: 16, background: '#111', borderRadius: 10, padding: '14px 16px', border: '1px solid #2a2a2a' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 6 }}>
+                  <span style={{ color: '#9ca3af' }}>{selected.services.length} service{selected.services.length > 1 ? 's' : ''} selected</span>
+                  <span style={{ color: '#9ca3af' }}>Total duration: <strong style={{ color: '#f5f5f5' }}>{totalDuration} min</strong></span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: 13, color: '#9ca3af' }}>Total:</span>
+                  <span style={{ color: '#c9a84c', fontWeight: 800, fontSize: 20 }}>£{totalPrice.toLocaleString()}</span>
+                </div>
+              </div>
+            )}
+
+            <button className="btn-gold" onClick={() => setStep(1)} disabled={selected.services.length === 0} style={{ width: '100%', marginTop: 16, padding: '12px' }}>
               Continue →
             </button>
           </div>
@@ -224,21 +275,40 @@ export default function BookingPage() {
           <div className="card">
             <h2 style={{ fontWeight: 700, fontSize: 18, marginBottom: 20 }}>Confirm Booking</h2>
             <div style={{ background: '#111', borderRadius: 10, padding: 20, marginBottom: 20 }}>
+              {/* Services list */}
+              <div style={{ padding: '10px 0', borderBottom: '1px solid #1f1f1f' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, marginBottom: 8 }}>
+                  <span style={{ color: '#9ca3af' }}>Service{selected.services.length > 1 ? 's' : ''}</span>
+                  <span style={{ color: '#9ca3af', fontSize: 12 }}>⏱ {totalDuration} min total</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {selected.services.map(s => (
+                    <div key={s.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14 }}>
+                      <span style={{ color: '#f5f5f5', fontWeight: 500 }}>{s.name}</span>
+                      <span style={{ color: '#9ca3af' }}>£{s.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {[
                 ['Stylist', staff.name],
-                ['Service', selected.service?.name],
-                ['Duration', `${selected.service?.duration} min`],
                 ['Date', selected.date],
                 ['Time', selected.time],
-                ['Total', `£${selected.service?.price}`],
               ].map(([label, val]) => (
                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #1f1f1f', fontSize: 14 }}>
                   <span style={{ color: '#9ca3af' }}>{label}</span>
-                  <span style={{ fontWeight: 700, color: label === 'Total' ? '#c9a84c' : '#f5f5f5', fontSize: label === 'Total' ? 16 : 14 }}>{val}</span>
+                  <span style={{ fontWeight: 700, color: '#f5f5f5' }}>{val}</span>
                 </div>
               ))}
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', fontSize: 14 }}>
+                <span style={{ color: '#9ca3af' }}>Total</span>
+                <span style={{ fontWeight: 800, color: '#c9a84c', fontSize: 18 }}>£{totalPrice.toLocaleString()}</span>
+              </div>
+
               {selected.note && (
-                <div style={{ marginTop: 12 }}>
+                <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid #1f1f1f' }}>
                   <p style={{ color: '#9ca3af', fontSize: 13 }}>Note: <span style={{ color: '#d1d5db' }}>{selected.note}</span></p>
                 </div>
               )}

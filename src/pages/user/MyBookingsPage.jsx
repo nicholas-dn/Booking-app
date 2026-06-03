@@ -31,7 +31,7 @@ export default function MyBookingsPage() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar role="customer" />
-      <div style={{ flex: 1, padding: 32, overflowY: 'auto' }}>
+      <div className="sidebar-main" style={{ flex: 1, padding: 32, overflowY: 'auto' }}>
         <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <div>
             <h1 style={{ fontSize: 24, fontWeight: 800, color: '#fff' }}>My Bookings</h1>

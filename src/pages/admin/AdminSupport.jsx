@@ -41,10 +41,10 @@ export default function AdminSupport() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar role="admin" />
-      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+      <div className="support-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
 
         {/* Ticket List */}
-        <div style={{ width: 340, borderRight: '1px solid #2a2a2a', overflowY: 'auto', flexShrink: 0 }}>
+        <div className="support-list" style={{ width: 340, borderRight: '1px solid #2a2a2a', overflowY: 'auto', flexShrink: 0 }}>
           <div style={{ padding: '20px 16px', borderBottom: '1px solid #2a2a2a' }}>
             <h2 style={{ fontSize: 18, fontWeight: 800 }}>Support Tickets</h2>
             {openCount > 0 && <span className="badge badge-red" style={{ marginTop: 6 }}>{openCount} open</span>}
@@ -83,7 +83,7 @@ export default function AdminSupport() {
         </div>
 
         {/* Ticket Detail */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: 28 }}>
+        <div className="support-detail sidebar-main" style={{ flex: 1, overflowY: 'auto', padding: 28 }}>
           {!selected ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280', flexDirection: 'column', gap: 12 }}>
               <div style={{ fontSize: 48 }}>💬</div>

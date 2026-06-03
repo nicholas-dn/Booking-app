@@ -86,7 +86,7 @@ export default function StaffProfile() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar role="staff" />
-      <div style={{ flex: 1, padding: 32, overflowY: 'auto' }}>
+      <div className="sidebar-main" style={{ flex: 1, padding: 32, overflowY: 'auto' }}>
         <div style={{ marginBottom: 28 }}>
           <h1 style={{ fontSize: 24, fontWeight: 800, color: '#fff' }}>My Profile</h1>
           <p style={{ color: '#9ca3af', marginTop: 4 }}>Your public profile visible to clients</p>
