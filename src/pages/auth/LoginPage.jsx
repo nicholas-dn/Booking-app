@@ -41,7 +41,7 @@ export default function LoginPage() {
       <div style={{ width: '100%', maxWidth: 420 }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <div style={{ fontSize: 28, fontWeight: 800, color: '#c9a84c', marginBottom: 8 }}>✂ TrimBook</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#e879a0', marginBottom: 8 }}>✂ TrimBook</div>
           </Link>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: '#fff' }}>Welcome back</h2>
           <p style={{ color: '#9ca3af', marginTop: 6 }}>Sign in to your account</p>
@@ -83,7 +83,7 @@ export default function LoginPage() {
         </div>
 
         <p style={{ textAlign: 'center', color: '#9ca3af', fontSize: 14, marginTop: 20 }}>
-          Don't have an account? <Link to="/register" style={{ color: '#c9a84c', textDecoration: 'none', fontWeight: 600 }}>Sign up</Link>
+          Don't have an account? <Link to="/register" style={{ color: '#e879a0', textDecoration: 'none', fontWeight: 600 }}>Sign up</Link>
         </p>
       </div>
     </div>

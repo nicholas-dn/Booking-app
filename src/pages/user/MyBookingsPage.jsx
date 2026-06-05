@@ -46,7 +46,7 @@ export default function MyBookingsPage() {
             <button key={tab} onClick={() => setActiveTab(tab)}
               style={{
                 padding: '8px 18px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 13, transition: 'all 0.2s', textTransform: 'capitalize',
-                background: activeTab === tab ? '#c9a84c' : 'transparent',
+                background: activeTab === tab ? '#e879a0' : 'transparent',
                 color: activeTab === tab ? '#0f0f0f' : '#9ca3af',
               }}>
               {tab}
@@ -73,7 +73,7 @@ export default function MyBookingsPage() {
                       <div style={{ display: 'flex', gap: 16, marginTop: 8, flexWrap: 'wrap' }}>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>📅 {b.date}</span>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>⏰ {b.time}</span>
-                        <span style={{ color: '#c9a84c', fontWeight: 700, fontSize: 14 }}>£{b.price}</span>
+                        <span style={{ color: '#e879a0', fontWeight: 700, fontSize: 14 }}>£{b.price}</span>
                       </div>
                     </div>
                   </div>

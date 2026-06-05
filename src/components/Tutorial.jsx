@@ -29,7 +29,7 @@ export default function Tutorial() {
       <div style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 16, maxWidth: 480, width: '100%', overflow: 'hidden' }}>
         {/* Header */}
         <div style={{ background: 'linear-gradient(135deg, #1a1208 0%, #0f0f0f 100%)', padding: '28px 28px 20px', textAlign: 'center', borderBottom: '1px solid #2a2a2a' }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#c9a84c', marginBottom: 6 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#e879a0', marginBottom: 6 }}>
             Welcome to TrimBook, {user?.name.split(' ')[0]}! 👋
           </div>
           <p style={{ color: '#9ca3af', fontSize: 13 }}>
@@ -49,7 +49,7 @@ export default function Tutorial() {
           {steps.map((_, i) => (
             <div key={i} onClick={() => setStep(i)} style={{
               width: i === step ? 24 : 8, height: 8, borderRadius: 4, cursor: 'pointer',
-              background: i === step ? '#c9a84c' : '#2a2a2a', transition: 'all 0.3s',
+              background: i === step ? '#e879a0' : '#2a2a2a', transition: 'all 0.3s',
             }} />
           ))}
         </div>

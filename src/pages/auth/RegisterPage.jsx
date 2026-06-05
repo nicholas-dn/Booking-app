@@ -39,7 +39,7 @@ export default function RegisterPage() {
       <div style={{ width: '100%', maxWidth: 460 }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <div style={{ fontSize: 28, fontWeight: 800, color: '#c9a84c', marginBottom: 8 }}>✂ TrimBook</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#e879a0', marginBottom: 8 }}>✂ TrimBook</div>
           </Link>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: '#fff' }}>Create your account</h2>
           <p style={{ color: '#9ca3af', marginTop: 6 }}>Join thousands of happy clients</p>
@@ -52,7 +52,7 @@ export default function RegisterPage() {
               <button key={val} onClick={() => setForm(f => ({ ...f, role: val }))}
                 style={{
                   flex: 1, padding: '10px 8px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 13, fontWeight: 600, transition: 'all 0.2s',
-                  background: form.role === val ? '#c9a84c' : 'transparent',
+                  background: form.role === val ? '#e879a0' : 'transparent',
                   color: form.role === val ? '#0f0f0f' : '#9ca3af',
                 }}>
                 {label}
@@ -79,7 +79,7 @@ export default function RegisterPage() {
             </div>
 
             {form.role === 'staff' && (
-              <div style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 13, color: '#c9a84c' }}>
+              <div style={{ background: 'rgba(232,121,160,0.08)', border: '1px solid rgba(232,121,160,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 13, color: '#e879a0' }}>
                 ✂ You're signing up as a Stylist. Your account will be reviewed before going live.
               </div>
             )}
@@ -97,7 +97,7 @@ export default function RegisterPage() {
         </div>
 
         <p style={{ textAlign: 'center', color: '#9ca3af', fontSize: 14, marginTop: 20 }}>
-          Already have an account? <Link to="/login" style={{ color: '#c9a84c', textDecoration: 'none', fontWeight: 600 }}>Sign in</Link>
+          Already have an account? <Link to="/login" style={{ color: '#e879a0', textDecoration: 'none', fontWeight: 600 }}>Sign in</Link>
         </p>
       </div>
     </div>

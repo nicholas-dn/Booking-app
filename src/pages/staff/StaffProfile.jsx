@@ -6,7 +6,7 @@ import { useBooking } from '../../context/BookingContext'
 const MAX_FILE_SIZE_MB = 5
 
 function Stars({ rating }) {
-  return <span>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= Math.round(rating) ? '#c9a84c' : '#2a2a2a', fontSize: 16 }}>★</span>)}</span>
+  return <span>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= Math.round(rating) ? '#e879a0' : '#2a2a2a', fontSize: 16 }}>★</span>)}</span>
 }
 
 export default function StaffProfile() {
@@ -100,13 +100,13 @@ export default function StaffProfile() {
             {/* Photo upload section */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
               {/* Avatar circle */}
-              <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: '3px solid #c9a84c', flexShrink: 0, background: '#2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+              <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: '3px solid #e879a0', flexShrink: 0, background: '#2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                 {photoLoading ? (
-                  <span style={{ color: '#c9a84c', fontSize: 13 }}>...</span>
+                  <span style={{ color: '#e879a0', fontSize: 13 }}>...</span>
                 ) : currentPhoto ? (
                   <img src={currentPhoto} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : (
-                  <span style={{ fontSize: 36, fontWeight: 700, color: '#c9a84c' }}>{user.avatar}</span>
+                  <span style={{ fontSize: 36, fontWeight: 700, color: '#e879a0' }}>{user.avatar}</span>
                 )}
               </div>
 
@@ -114,7 +114,7 @@ export default function StaffProfile() {
               <div style={{ display: 'flex', gap: 6 }}>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  style={{ fontSize: 12, padding: '6px 12px', borderRadius: 7, border: '1px solid #c9a84c', background: 'transparent', color: '#c9a84c', cursor: 'pointer', fontWeight: 600 }}>
+                  style={{ fontSize: 12, padding: '6px 12px', borderRadius: 7, border: '1px solid #e879a0', background: 'transparent', color: '#e879a0', cursor: 'pointer', fontWeight: 600 }}>
                   {currentPhoto ? '🔄 Change' : '📷 Upload'}
                 </button>
                 {currentPhoto && (
@@ -141,7 +141,7 @@ export default function StaffProfile() {
 
             <div style={{ flex: 1 }}>
               <h2 style={{ fontSize: 22, fontWeight: 800 }}>{user.name}</h2>
-              <p style={{ color: '#c9a84c', fontWeight: 600, marginTop: 4 }}>{staffData?.specialty || 'Stylist'}</p>
+              <p style={{ color: '#e879a0', fontWeight: 600, marginTop: 4 }}>{staffData?.specialty || 'Stylist'}</p>
               {staffData && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
                   <Stars rating={staffData.rating} />
@@ -155,9 +155,9 @@ export default function StaffProfile() {
 
             <div style={{ display: 'flex', gap: 28 }}>
               {[
-                ['Total Bookings', bookings.length, '#c9a84c'],
+                ['Total Bookings', bookings.length, '#e879a0'],
                 ['Completed', completed.length, '#22c55e'],
-                [`£${revenue.toLocaleString()}`, 'Earned', '#c9a84c'],
+                [`£${revenue.toLocaleString()}`, 'Earned', '#e879a0'],
               ].map(([val, label, color]) => (
                 <div key={label} style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: 20, fontWeight: 800, color }}>{val}</div>

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useBooking } from '../../context/BookingContext'
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-const STATUS_COLOR = { confirmed: '#22c55e', pending: '#c9a84c', completed: '#3b82f6', cancelled: '#ef4444' }
+const STATUS_COLOR = { confirmed: '#22c55e', pending: '#e879a0', completed: '#3b82f6', cancelled: '#ef4444' }
 
 function getWeekDates(offset = 0) {
   const today = new Date()
@@ -43,7 +43,7 @@ export default function StaffSchedule() {
         {/* Week Navigator */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <button onClick={() => setWeekOffset(w => w - 1)} style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 8, padding: '8px 16px', color: '#f5f5f5', cursor: 'pointer', fontSize: 14 }}>← Prev Week</button>
-          <span style={{ fontWeight: 700, color: weekOffset === 0 ? '#c9a84c' : '#f5f5f5' }}>
+          <span style={{ fontWeight: 700, color: weekOffset === 0 ? '#e879a0' : '#f5f5f5' }}>
             {weekOffset === 0 ? 'This Week' : weekOffset === 1 ? 'Next Week' : `Week ${weekOffset > 0 ? '+' : ''}${weekOffset}`}
           </span>
           <button onClick={() => setWeekOffset(w => w + 1)} style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 8, padding: '8px 16px', color: '#f5f5f5', cursor: 'pointer', fontSize: 14 }}>Next Week →</button>
@@ -60,14 +60,14 @@ export default function StaffSchedule() {
             return (
               <div key={day} style={{
                 background: isOff ? '#0d0d0d' : '#1a1a1a',
-                border: `1px solid ${isToday ? '#c9a84c' : '#2a2a2a'}`,
+                border: `1px solid ${isToday ? '#e879a0' : '#2a2a2a'}`,
                 borderRadius: 10, padding: 12, minHeight: 140,
                 opacity: isOff ? 0.5 : 1,
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                   <div>
                     <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 600 }}>{day}</div>
-                    <div style={{ fontSize: 18, fontWeight: 800, color: isToday ? '#c9a84c' : '#f5f5f5' }}>
+                    <div style={{ fontSize: 18, fontWeight: 800, color: isToday ? '#e879a0' : '#f5f5f5' }}>
                       {new Date(date + 'T12:00:00').getDate()}
                     </div>
                   </div>
@@ -101,9 +101,9 @@ export default function StaffSchedule() {
               <button key={day} onClick={() => setAvailability(a => ({ ...a, [day]: !a[day] }))}
                 style={{
                   padding: '10px 18px', borderRadius: 8, border: '2px solid', cursor: 'pointer', fontWeight: 700, fontSize: 14, transition: 'all 0.2s',
-                  borderColor: availability[day] ? '#c9a84c' : '#2a2a2a',
-                  background: availability[day] ? 'rgba(201,168,76,0.1)' : '#111',
-                  color: availability[day] ? '#c9a84c' : '#6b7280',
+                  borderColor: availability[day] ? '#e879a0' : '#2a2a2a',
+                  background: availability[day] ? 'rgba(232,121,160,0.1)' : '#111',
+                  color: availability[day] ? '#e879a0' : '#6b7280',
                 }}>
                 {day}
               </button>

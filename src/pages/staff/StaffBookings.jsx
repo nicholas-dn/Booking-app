@@ -30,7 +30,7 @@ export default function StaffBookings() {
             <button key={tab} onClick={() => setActiveTab(tab)}
               style={{
                 padding: '8px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 13, transition: 'all 0.2s', textTransform: 'capitalize',
-                background: activeTab === tab ? '#c9a84c' : 'transparent',
+                background: activeTab === tab ? '#e879a0' : 'transparent',
                 color: activeTab === tab ? '#0f0f0f' : '#9ca3af',
               }}>
               {tab} {activeTab === tab ? `(${filtered.length})` : ''}
@@ -52,11 +52,11 @@ export default function StaffBookings() {
                     <div className="avatar">{b.customerName[0]}</div>
                     <div>
                       <h3 style={{ fontWeight: 700, fontSize: 15 }}>{b.customerName}</h3>
-                      <p style={{ color: '#c9a84c', fontSize: 13, fontWeight: 600, marginTop: 2 }}>{b.service}</p>
+                      <p style={{ color: '#e879a0', fontSize: 13, fontWeight: 600, marginTop: 2 }}>{b.service}</p>
                       <div style={{ display: 'flex', gap: 16, marginTop: 8, flexWrap: 'wrap' }}>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>📅 {b.date}</span>
                         <span style={{ color: '#9ca3af', fontSize: 13 }}>⏰ {b.time}</span>
-                        <span style={{ color: '#c9a84c', fontWeight: 700 }}>£{b.price.toLocaleString()}</span>
+                        <span style={{ color: '#e879a0', fontWeight: 700 }}>£{b.price.toLocaleString()}</span>
                       </div>
                     </div>
                   </div>

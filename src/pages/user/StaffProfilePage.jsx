@@ -8,7 +8,7 @@ function Stars({ rating, size = 16 }) {
   return (
     <span>
       {[1,2,3,4,5].map(i => (
-        <span key={i} style={{ color: i <= Math.round(rating) ? '#c9a84c' : '#2a2a2a', fontSize: size }}>★</span>
+        <span key={i} style={{ color: i <= Math.round(rating) ? '#e879a0' : '#2a2a2a', fontSize: size }}>★</span>
       ))}
     </span>
   )
@@ -53,7 +53,7 @@ export default function StaffProfilePage() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
               <div>
                 <h1 style={{ fontSize: 28, fontWeight: 800, color: '#fff' }}>{staff.name}</h1>
-                <p style={{ color: '#c9a84c', fontWeight: 600, fontSize: 15, marginTop: 4 }}>{staff.specialty}</p>
+                <p style={{ color: '#e879a0', fontWeight: 600, fontSize: 15, marginTop: 4 }}>{staff.specialty}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
                   <Stars rating={Number(avgRating)} />
                   <span style={{ color: '#9ca3af', fontSize: 14 }}>{avgRating} · {reviews.length} review{reviews.length !== 1 ? 's' : ''}</span>
@@ -67,7 +67,7 @@ export default function StaffProfilePage() {
             <div style={{ display: 'flex', gap: 24, marginTop: 16, flexWrap: 'wrap' }}>
               {[['Reviews', reviews.length], ['Rating', avgRating], ['Services', staff.services.length]].map(([label, val]) => (
                 <div key={label} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 22, fontWeight: 800, color: '#c9a84c' }}>{val}</div>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: '#e879a0' }}>{val}</div>
                   <div style={{ color: '#9ca3af', fontSize: 12 }}>{label}</div>
                 </div>
               ))}
@@ -86,7 +86,7 @@ export default function StaffProfilePage() {
                     <p style={{ fontWeight: 600, fontSize: 14 }}>{s.name}</p>
                     <p style={{ color: '#9ca3af', fontSize: 12 }}>{s.duration} min</p>
                   </div>
-                  <span style={{ color: '#c9a84c', fontWeight: 700, fontSize: 15 }}>£{s.price}</span>
+                  <span style={{ color: '#e879a0', fontWeight: 700, fontSize: 15 }}>£{s.price}</span>
                 </div>
               ))}
             </div>

@@ -45,7 +45,7 @@ export default function Sidebar({ role }) {
     <div className="sidebar" style={{ display: 'flex', flexDirection: 'column' }}>
       <div className="sidebar-header" style={{ padding: '20px 16px', borderBottom: '1px solid #2a2a2a' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
-          <span style={{ fontSize: 20, fontWeight: 800, color: '#c9a84c' }}>✂ TrimBook</span>
+          <span style={{ fontSize: 20, fontWeight: 800, color: '#e879a0' }}>✂ TrimBook</span>
         </Link>
       </div>
 
@@ -69,6 +69,11 @@ export default function Sidebar({ role }) {
             </Link>
           )
         })}
+        {/* Mobile-only logout tab — hidden on desktop via CSS */}
+        <button className="nav-logout-tab" onClick={handleLogout}>
+          <span className="nav-icon">🚪</span>
+          <span>Logout</span>
+        </button>
       </nav>
 
       <div className="sidebar-logout" style={{ padding: '12px 8px', borderTop: '1px solid #2a2a2a' }}>

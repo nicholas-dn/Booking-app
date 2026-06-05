@@ -94,7 +94,7 @@ export default function AdminPricing() {
                         <p style={{ color: '#9ca3af', fontSize: 12, marginTop: 2 }}>{s.duration} min · <span style={{ textTransform: 'capitalize' }}>{s.category}</span></p>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        <span style={{ color: '#c9a84c', fontWeight: 800, fontSize: 16 }}>£{s.price}</span>
+                        <span style={{ color: '#e879a0', fontWeight: 800, fontSize: 16 }}>£{s.price}</span>
                         {savedService === s.id && <span style={{ color: '#22c55e', fontSize: 12 }}>✓ Saved</span>}
                         <button onClick={() => startEdit(s)} className="btn-outline" style={{ padding: '5px 14px', fontSize: 12 }}>Edit</button>
                       </div>
@@ -115,7 +115,7 @@ export default function AdminPricing() {
             </div>
             <div className="card">
               <p style={{ color: '#9ca3af', fontSize: 13, marginBottom: 16 }}>
-                Toggle which time slots are available for customers to book. Currently <span style={{ color: '#c9a84c', fontWeight: 700 }}>{activeSlots.size}</span> slots active.
+                Toggle which time slots are available for customers to book. Currently <span style={{ color: '#e879a0', fontWeight: 700 }}>{activeSlots.size}</span> slots active.
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: 8 }}>
                 {ALL_POSSIBLE_SLOTS.map(slot => {
@@ -124,9 +124,9 @@ export default function AdminPricing() {
                     <button key={slot} onClick={() => toggleSlot(slot)}
                       style={{
                         padding: '9px 8px', borderRadius: 8, border: '1px solid', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.2s',
-                        borderColor: active ? '#c9a84c' : '#2a2a2a',
-                        background: active ? 'rgba(201,168,76,0.12)' : '#111',
-                        color: active ? '#c9a84c' : '#6b7280',
+                        borderColor: active ? '#e879a0' : '#2a2a2a',
+                        background: active ? 'rgba(232,121,160,0.12)' : '#111',
+                        color: active ? '#e879a0' : '#6b7280',
                       }}>
                       {slot}
                     </button>

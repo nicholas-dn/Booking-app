@@ -32,7 +32,7 @@ export default function UserProfilePage() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, maxWidth: 900 }}>
           {/* Profile Card */}
           <div className="card" style={{ gridColumn: '1 / -1', display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-            <div className="avatar" style={{ width: 80, height: 80, fontSize: 30, border: '3px solid #c9a84c' }}>{user.avatar}</div>
+            <div className="avatar" style={{ width: 80, height: 80, fontSize: 30, border: '3px solid #e879a0' }}>{user.avatar}</div>
             <div style={{ flex: 1 }}>
               <h2 style={{ fontSize: 22, fontWeight: 800 }}>{user.name}</h2>
               <p style={{ color: '#9ca3af', marginTop: 4 }}>{user.email}</p>
@@ -40,7 +40,7 @@ export default function UserProfilePage() {
             </div>
             <div style={{ display: 'flex', gap: 28 }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: 24, fontWeight: 800, color: '#c9a84c' }}>{bookings.length}</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: '#e879a0' }}>{bookings.length}</div>
                 <div style={{ color: '#9ca3af', fontSize: 12 }}>Total Bookings</div>
               </div>
               <div style={{ textAlign: 'center' }}>
@@ -48,7 +48,7 @@ export default function UserProfilePage() {
                 <div style={{ color: '#9ca3af', fontSize: 12 }}>Completed</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: 20, fontWeight: 800, color: '#c9a84c' }}>£{totalSpent.toLocaleString()}</div>
+                <div style={{ fontSize: 20, fontWeight: 800, color: '#e879a0' }}>£{totalSpent.toLocaleString()}</div>
                 <div style={{ color: '#9ca3af', fontSize: 12 }}>Total Spent</div>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function UserProfilePage() {
                     <p style={{ color: '#9ca3af', fontSize: 13, marginTop: 2 }}>{desc}</p>
                   </div>
                   <div style={{
-                    width: 44, height: 24, borderRadius: 12, background: checked ? '#c9a84c' : '#2a2a2a', cursor: 'pointer', position: 'relative', transition: 'all 0.2s',
+                    width: 44, height: 24, borderRadius: 12, background: checked ? '#e879a0' : '#2a2a2a', cursor: 'pointer', position: 'relative', transition: 'all 0.2s',
                   }}>
                     <div style={{ width: 18, height: 18, borderRadius: '50%', background: '#fff', position: 'absolute', top: 3, left: checked ? 23 : 3, transition: 'all 0.2s' }} />
                   </div>

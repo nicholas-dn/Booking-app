@@ -28,10 +28,10 @@ export default function StaffDashboard() {
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, marginBottom: 32 }}>
           {[
-            { label: "Today's Appts", value: todayBookings.length, icon: '📅', color: '#c9a84c' },
+            { label: "Today's Appts", value: todayBookings.length, icon: '📅', color: '#e879a0' },
             { label: 'Upcoming', value: upcoming.length, icon: '⏳', color: '#3b82f6' },
             { label: 'Completed', value: completed.length, icon: '✅', color: '#22c55e' },
-            { label: 'Total Revenue', value: `£${revenue.toLocaleString()}`, icon: '💰', color: '#c9a84c' },
+            { label: 'Total Revenue', value: `£${revenue.toLocaleString()}`, icon: '💰', color: '#e879a0' },
           ].map(s => (
             <div key={s.label} className="stat-card">
               <div style={{ fontSize: 24, marginBottom: 8 }}>{s.icon}</div>
@@ -45,7 +45,7 @@ export default function StaffDashboard() {
         <div className="card" style={{ marginBottom: 24 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <h3 style={{ fontWeight: 700 }}>Today's Schedule</h3>
-            <Link to="/staff/schedule" style={{ color: '#c9a84c', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>Full schedule →</Link>
+            <Link to="/staff/schedule" style={{ color: '#e879a0', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>Full schedule →</Link>
           </div>
           {todayBookings.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '32px 0', color: '#9ca3af' }}>
@@ -64,7 +64,7 @@ export default function StaffDashboard() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <span style={{ color: '#c9a84c', fontWeight: 700 }}>£{b.price.toLocaleString()}</span>
+                    <span style={{ color: '#e879a0', fontWeight: 700 }}>£{b.price.toLocaleString()}</span>
                     <span className={`badge ${STATUS_COLOR[b.status]}`}>{b.status}</span>
                     {b.status === 'pending' && (
                       <button className="btn-gold" style={{ padding: '5px 12px', fontSize: 12 }} onClick={() => updateBookingStatus(b.id, 'confirmed')}>Confirm</button>
@@ -80,7 +80,7 @@ export default function StaffDashboard() {
         <div className="card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <h3 style={{ fontWeight: 700 }}>Upcoming Bookings</h3>
-            <Link to="/staff/bookings" style={{ color: '#c9a84c', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
+            <Link to="/staff/bookings" style={{ color: '#e879a0', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
           </div>
           {upcoming.slice(0, 5).map(b => (
             <div key={b.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid #1f1f1f' }}>

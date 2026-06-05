@@ -15,11 +15,11 @@ export default function StaffAvatar({ staffId, initial, size = 40, border = fals
       alignItems: 'center',
       justifyContent: 'center',
       background: '#2a2a2a',
-      border: border ? `3px solid #c9a84c` : 'none',
+      border: border ? `3px solid #e879a0` : 'none',
     }}>
       {photo
         ? <img src={photo} alt="staff" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-        : <span style={{ fontSize: size * 0.4, fontWeight: 700, color: '#c9a84c' }}>{initial}</span>
+        : <span style={{ fontSize: size * 0.4, fontWeight: 700, color: '#e879a0' }}>{initial}</span>
       }
     </div>
   )

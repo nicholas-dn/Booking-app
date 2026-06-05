@@ -29,11 +29,11 @@ export default function AdminDashboard() {
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, marginBottom: 32 }}>
           {[
-            { label: 'Total Bookings', value: bookings.length, icon: '📅', color: '#c9a84c' },
+            { label: 'Total Bookings', value: bookings.length, icon: '📅', color: '#e879a0' },
             { label: "Today's Bookings", value: todayBookings.length, icon: '📆', color: '#3b82f6' },
             { label: 'Pending Review', value: pending.length, icon: '⏳', color: '#f59e0b' },
             { label: 'Total Revenue', value: `£${revenue.toLocaleString()}`, icon: '💰', color: '#22c55e' },
-            { label: 'Active Staff', value: staffList.length, icon: '✂', color: '#c9a84c' },
+            { label: 'Active Staff', value: staffList.length, icon: '✂', color: '#e879a0' },
             { label: 'Customers', value: customers.length, icon: '👥', color: '#8b5cf6' },
           ].map(s => (
             <div key={s.label} className="stat-card">
@@ -57,7 +57,7 @@ export default function AdminDashboard() {
           <div className="card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
               <h3 style={{ fontWeight: 700 }}>Recent Bookings</h3>
-              <Link to="/admin/bookings" style={{ color: '#c9a84c', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
+              <Link to="/admin/bookings" style={{ color: '#e879a0', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {recentBookings.map(b => (
@@ -76,7 +76,7 @@ export default function AdminDashboard() {
           <div className="card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
               <h3 style={{ fontWeight: 700 }}>Staff Performance</h3>
-              <Link to="/admin/staff" style={{ color: '#c9a84c', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
+              <Link to="/admin/staff" style={{ color: '#e879a0', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {staffList.map(s => {
@@ -88,10 +88,10 @@ export default function AdminDashboard() {
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
                         <span style={{ fontWeight: 600, fontSize: 13 }}>{s.name}</span>
-                        <span style={{ color: '#c9a84c', fontSize: 13, fontWeight: 700 }}>£{staffRevenue.toLocaleString()}</span>
+                        <span style={{ color: '#e879a0', fontSize: 13, fontWeight: 700 }}>£{staffRevenue.toLocaleString()}</span>
                       </div>
                       <div style={{ height: 4, background: '#2a2a2a', borderRadius: 2 }}>
-                        <div style={{ height: '100%', background: '#c9a84c', borderRadius: 2, width: `${Math.min((staffBookings.length / bookings.length) * 100 * 2, 100)}%` }} />
+                        <div style={{ height: '100%', background: '#e879a0', borderRadius: 2, width: `${Math.min((staffBookings.length / bookings.length) * 100 * 2, 100)}%` }} />
                       </div>
                       <p style={{ color: '#6b7280', fontSize: 11, marginTop: 3 }}>{staffBookings.length} bookings · ⭐ {s.rating}</p>
                     </div>

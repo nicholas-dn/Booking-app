@@ -58,7 +58,7 @@ export default function AdminUsers() {
                 <button onClick={() => setViewUser(null)} style={{ background: 'none', border: 'none', color: '#6b7280', cursor: 'pointer', fontSize: 20 }}>✕</button>
               </div>
               <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 20 }}>
-                <div className="avatar" style={{ width: 56, height: 56, fontSize: 22, border: '2px solid #c9a84c' }}>{viewUser.avatar}</div>
+                <div className="avatar" style={{ width: 56, height: 56, fontSize: 22, border: '2px solid #e879a0' }}>{viewUser.avatar}</div>
                 <div>
                   <h4 style={{ fontWeight: 700, fontSize: 16 }}>{viewUser.name}</h4>
                   <p style={{ color: '#9ca3af', fontSize: 13 }}>{viewUser.email}</p>
@@ -76,7 +76,7 @@ export default function AdminUsers() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 20 }}>
                       {[['Total', bookings.length], ['Completed', completed.length], [`£${spent}`, 'Spent']].map(([val, label]) => (
                         <div key={label} style={{ background: '#111', borderRadius: 8, padding: '12px', textAlign: 'center' }}>
-                          <div style={{ fontWeight: 800, color: '#c9a84c', fontSize: 18 }}>{val}</div>
+                          <div style={{ fontWeight: 800, color: '#e879a0', fontSize: 18 }}>{val}</div>
                           <div style={{ color: '#9ca3af', fontSize: 12 }}>{label}</div>
                         </div>
                       ))}
@@ -86,7 +86,7 @@ export default function AdminUsers() {
                       {bookings.slice(0, 3).map(b => (
                         <div key={b.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #1f1f1f', fontSize: 13 }}>
                           <span style={{ color: '#9ca3af' }}>{b.service} · {b.date}</span>
-                          <span style={{ color: '#c9a84c', fontWeight: 600 }}>£{b.price}</span>
+                          <span style={{ color: '#e879a0', fontWeight: 600 }}>£{b.price}</span>
                         </div>
                       ))}
                       {bookings.length === 0 && <p style={{ color: '#6b7280', fontSize: 13 }}>No bookings yet</p>}
@@ -136,7 +136,7 @@ export default function AdminUsers() {
                     <td style={{ fontSize: 13, color: '#9ca3af' }}>{u.email}</td>
                     <td style={{ fontWeight: 700 }}>{userBookings.length}</td>
                     <td style={{ fontWeight: 700, color: '#22c55e' }}>{completed.length}</td>
-                    <td style={{ fontWeight: 700, color: '#c9a84c' }}>£{spent}</td>
+                    <td style={{ fontWeight: 700, color: '#e879a0' }}>£{spent}</td>
                     <td><span className={u.active ? 'badge badge-green' : 'badge badge-red'}>{u.active ? 'Active' : 'Suspended'}</span></td>
                     <td>
                       <div style={{ display: 'flex', gap: 6 }}>

@@ -24,7 +24,7 @@ export default function Navbar() {
     <nav style={{ background: '#111', borderBottom: '1px solid #2a2a2a', position: 'sticky', top: 0, zIndex: 50 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>
-          <span style={{ fontSize: 22, fontWeight: 800, color: '#c9a84c' }}>✂ TrimBook</span>
+          <span style={{ fontSize: 22, fontWeight: 800, color: '#e879a0' }}>✂ TrimBook</span>
         </Link>
 
         {/* Desktop nav */}

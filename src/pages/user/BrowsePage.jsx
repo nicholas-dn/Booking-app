@@ -9,7 +9,7 @@ function Stars({ rating }) {
   return (
     <span>
       {[1,2,3,4,5].map(i => (
-        <span key={i} style={{ color: i <= Math.round(rating) ? '#c9a84c' : '#2a2a2a', fontSize: 14 }}>★</span>
+        <span key={i} style={{ color: i <= Math.round(rating) ? '#e879a0' : '#2a2a2a', fontSize: 14 }}>★</span>
       ))}
     </span>
   )
@@ -43,9 +43,9 @@ export default function BrowsePage() {
               <button key={val} onClick={() => setFilter(val)}
                 style={{
                   padding: '10px 18px', borderRadius: 8, border: '1px solid', cursor: 'pointer', fontWeight: 600, fontSize: 13, transition: 'all 0.2s',
-                  borderColor: filter === val ? '#c9a84c' : '#2a2a2a',
-                  background: filter === val ? 'rgba(201,168,76,0.1)' : '#1a1a1a',
-                  color: filter === val ? '#c9a84c' : '#9ca3af',
+                  borderColor: filter === val ? '#e879a0' : '#2a2a2a',
+                  background: filter === val ? 'rgba(232,121,160,0.1)' : '#1a1a1a',
+                  color: filter === val ? '#e879a0' : '#9ca3af',
                 }}>
                 {label}
               </button>
@@ -63,7 +63,7 @@ export default function BrowsePage() {
                   <StaffAvatar staffId={staff.id} initial={staff.avatar} size={60} border />
                   <div>
                     <h3 style={{ fontWeight: 700, fontSize: 16 }}>{staff.name}</h3>
-                    <p style={{ color: '#c9a84c', fontSize: 13, fontWeight: 600 }}>{staff.specialty}</p>
+                    <p style={{ color: '#e879a0', fontSize: 13, fontWeight: 600 }}>{staff.specialty}</p>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4 }}>
                       <Stars rating={staff.rating} />
                       <span style={{ color: '#9ca3af', fontSize: 12 }}>{staff.rating} ({staff.reviews})</span>

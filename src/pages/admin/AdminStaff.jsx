@@ -4,7 +4,7 @@ import Sidebar from '../../components/Sidebar'
 import { useBooking } from '../../context/BookingContext'
 
 function Stars({ rating }) {
-  return <span>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= Math.round(rating) ? '#c9a84c' : '#2a2a2a', fontSize: 13 }}>★</span>)}</span>
+  return <span>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= Math.round(rating) ? '#e879a0' : '#2a2a2a', fontSize: 13 }}>★</span>)}</span>
 }
 
 export default function AdminStaff() {
@@ -62,10 +62,10 @@ export default function AdminStaff() {
             return (
               <div key={s.id} className="card" style={{ opacity: suspended ? 0.7 : 1 }}>
                 <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginBottom: 16 }}>
-                  <div className="avatar" style={{ width: 52, height: 52, fontSize: 20, border: `2px solid ${suspended ? '#ef4444' : '#c9a84c'}`, flexShrink: 0 }}>{s.avatar}</div>
+                  <div className="avatar" style={{ width: 52, height: 52, fontSize: 20, border: `2px solid ${suspended ? '#ef4444' : '#e879a0'}`, flexShrink: 0 }}>{s.avatar}</div>
                   <div style={{ flex: 1 }}>
                     <h3 style={{ fontWeight: 700, fontSize: 16 }}>{s.name}</h3>
-                    <p style={{ color: '#c9a84c', fontSize: 13, fontWeight: 600 }}>{s.specialty}</p>
+                    <p style={{ color: '#e879a0', fontSize: 13, fontWeight: 600 }}>{s.specialty}</p>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4 }}>
                       <Stars rating={s.rating} />
                       <span style={{ color: '#9ca3af', fontSize: 12 }}>{s.rating} ({s.reviews})</span>
@@ -76,7 +76,7 @@ export default function AdminStaff() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 16 }}>
                   {[
-                    ['Bookings', staffBookings.length, '#c9a84c'],
+                    ['Bookings', staffBookings.length, '#e879a0'],
                     ['Upcoming', upcoming.length, '#3b82f6'],
                     ['Revenue', `£${revenue}`, '#22c55e'],
                   ].map(([label, val, color]) => (

@@ -53,7 +53,7 @@ export default function AdminSupport() {
                 <button key={s} onClick={() => setFilterStatus(s)}
                   style={{
                     padding: '5px 10px', borderRadius: 6, border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, textTransform: 'capitalize',
-                    background: filterStatus === s ? '#c9a84c' : '#1a1a1a',
+                    background: filterStatus === s ? '#e879a0' : '#1a1a1a',
                     color: filterStatus === s ? '#0f0f0f' : '#9ca3af',
                   }}>
                   {s}
@@ -119,11 +119,11 @@ export default function AdminSupport() {
 
               {/* Replies */}
               {selected.replies.map((r, i) => (
-                <div key={i} style={{ background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.15)', borderRadius: 10, padding: 16, marginBottom: 12 }}>
+                <div key={i} style={{ background: 'rgba(232,121,160,0.06)', border: '1px solid rgba(232,121,160,0.15)', borderRadius: 10, padding: 16, marginBottom: 12 }}>
                   <div style={{ display: 'flex', gap: 10, marginBottom: 10 }}>
-                    <div className="avatar" style={{ width: 32, height: 32, fontSize: 12, background: '#c9a84c', color: '#0f0f0f' }}>A</div>
+                    <div className="avatar" style={{ width: 32, height: 32, fontSize: 12, background: '#e879a0', color: '#0f0f0f' }}>A</div>
                     <div>
-                      <span style={{ fontWeight: 600, fontSize: 13, color: '#c9a84c' }}>Admin (You)</span>
+                      <span style={{ fontWeight: 600, fontSize: 13, color: '#e879a0' }}>Admin (You)</span>
                       <span style={{ color: '#6b7280', fontSize: 12, marginLeft: 10 }}>{r.date}</span>
                     </div>
                   </div>

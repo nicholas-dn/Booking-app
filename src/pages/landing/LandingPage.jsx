@@ -27,7 +27,7 @@ function Stars({ rating }) {
   return (
     <span>
       {[1,2,3,4,5].map(i => (
-        <span key={i} style={{ color: i <= Math.round(rating) ? '#c9a84c' : '#2a2a2a', fontSize: 14 }}>★</span>
+        <span key={i} style={{ color: i <= Math.round(rating) ? '#e879a0' : '#2a2a2a', fontSize: 14 }}>★</span>
       ))}
     </span>
   )
@@ -43,11 +43,11 @@ export default function LandingPage() {
       <Navbar />
 
       {/* Hero */}
-      <section style={{ background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1208 100%)', padding: '80px 24px', textAlign: 'center' }}>
+      <section style={{ background: 'linear-gradient(135deg, #0f0f0f 0%, #1a0812 100%)', padding: '80px 24px', textAlign: 'center' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
           <h1 style={{ fontSize: 'clamp(36px, 6vw, 64px)', fontWeight: 900, lineHeight: 1.1, marginBottom: 20, color: '#fff' }}>
             Book Your Next<br />
-            <span style={{ color: '#c9a84c' }}>Perfect Look</span><br />
+            <span style={{ color: '#e879a0' }}>Perfect Look</span><br />
             In Seconds
           </h1>
           <p style={{ color: '#9ca3af', fontSize: 18, marginBottom: 36, lineHeight: 1.7 }}>
@@ -65,7 +65,7 @@ export default function LandingPage() {
       <section style={{ padding: '80px 24px', background: '#0f0f0f' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>Why Choose <span style={{ color: '#c9a84c' }}>TrimBook</span>?</h2>
+            <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>Why Choose <span style={{ color: '#e879a0' }}>TrimBook</span>?</h2>
             <p style={{ color: '#9ca3af', marginTop: 12 }}>Everything you need for a seamless salon experience</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 24 }}>
@@ -84,13 +84,13 @@ export default function LandingPage() {
       <section style={{ padding: '80px 24px', background: '#0a0a0a' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>How It <span style={{ color: '#c9a84c' }}>Works</span></h2>
+            <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>How It <span style={{ color: '#e879a0' }}>Works</span></h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24 }}>
             {HOW_IT_WORKS.map(h => (
               <div key={h.step} className="card" style={{ position: 'relative' }}>
-                <div style={{ fontSize: 48, fontWeight: 900, color: 'rgba(201,168,76,0.15)', position: 'absolute', top: 12, right: 16 }}>{h.step}</div>
-                <div style={{ color: '#c9a84c', fontWeight: 700, fontSize: 13, marginBottom: 8 }}>STEP {h.step}</div>
+                <div style={{ fontSize: 48, fontWeight: 900, color: 'rgba(232,121,160,0.15)', position: 'absolute', top: 12, right: 16 }}>{h.step}</div>
+                <div style={{ color: '#e879a0', fontWeight: 700, fontSize: 13, marginBottom: 8 }}>STEP {h.step}</div>
                 <h3 style={{ fontWeight: 700, marginBottom: 10 }}>{h.title}</h3>
                 <p style={{ color: '#9ca3af', fontSize: 14, lineHeight: 1.7 }}>{h.desc}</p>
               </div>
@@ -103,20 +103,20 @@ export default function LandingPage() {
       <section style={{ padding: '80px 24px', background: '#0f0f0f' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>Meet Our <span style={{ color: '#c9a84c' }}>Top Stylists</span></h2>
+            <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>Meet Our <span style={{ color: '#e879a0' }}>Top Stylists</span></h2>
             <p style={{ color: '#9ca3af', marginTop: 12 }}>Talented professionals ready to make you look your best</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
             {STAFF.map(s => (
               <div key={s.name} className="card card-hover" style={{ textAlign: 'center' }}>
-                <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 16px', border: '3px solid #c9a84c', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#2a2a2a', flexShrink: 0 }}>
+                <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 16px', border: '3px solid #e879a0', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#2a2a2a', flexShrink: 0 }}>
                   {photo(s.id)
                     ? <img src={photo(s.id)} alt={s.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    : <span style={{ fontSize: 28, fontWeight: 700, color: '#c9a84c' }}>{s.avatar}</span>
+                    : <span style={{ fontSize: 28, fontWeight: 700, color: '#e879a0' }}>{s.avatar}</span>
                   }
                 </div>
                 <h3 style={{ fontWeight: 700, marginBottom: 4 }}>{s.name}</h3>
-                <p style={{ color: '#c9a84c', fontSize: 13, fontWeight: 600, marginBottom: 10 }}>{s.specialty}</p>
+                <p style={{ color: '#e879a0', fontSize: 13, fontWeight: 600, marginBottom: 10 }}>{s.specialty}</p>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 14 }}>
                   <Stars rating={s.rating} />
                   <span style={{ color: '#9ca3af', fontSize: 13 }}>{s.rating} ({s.reviews} reviews)</span>
@@ -146,18 +146,18 @@ export default function LandingPage() {
         <section style={{ padding: '80px 24px', background: '#0a0a0a' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>What Our <span style={{ color: '#c9a84c' }}>Clients Say</span></h2>
+              <h2 style={{ fontSize: 36, fontWeight: 800, color: '#fff' }}>What Our <span style={{ color: '#e879a0' }}>Clients Say</span></h2>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
               {testimonials.map(t => (
                 <div key={t.id} className="card">
-                  <div style={{ color: '#c9a84c', fontSize: 28, marginBottom: 12 }}>"</div>
+                  <div style={{ color: '#e879a0', fontSize: 28, marginBottom: 12 }}>"</div>
                   <p style={{ color: '#d1d5db', lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>{t.comment}</p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div className="avatar" style={{ width: 36, height: 36, fontSize: 14 }}>{t.customerName[0]}</div>
                     <div>
                       <p style={{ fontWeight: 600, fontSize: 14 }}>{t.customerName}</p>
-                      <span>{[1,2,3,4,5].map(n => <span key={n} style={{ color: n <= t.rating ? '#c9a84c' : '#2a2a2a', fontSize: 13 }}>★</span>)}</span>
+                      <span>{[1,2,3,4,5].map(n => <span key={n} style={{ color: n <= t.rating ? '#e879a0' : '#2a2a2a', fontSize: 13 }}>★</span>)}</span>
                     </div>
                   </div>
                 </div>
@@ -168,10 +168,10 @@ export default function LandingPage() {
       )}
 
       {/* CTA Banner */}
-      <section style={{ padding: '80px 24px', background: 'linear-gradient(135deg, #1a1208 0%, #0f0f0f 100%)', textAlign: 'center' }}>
+      <section style={{ padding: '80px 24px', background: 'linear-gradient(135deg, #1a0812 0%, #0f0f0f 100%)', textAlign: 'center' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           <h2 style={{ fontSize: 40, fontWeight: 900, color: '#fff', marginBottom: 16 }}>
-            Ready to Look <span style={{ color: '#c9a84c' }}>Amazing</span>?
+            Ready to Look <span style={{ color: '#e879a0' }}>Amazing</span>?
           </h2>
           <p style={{ color: '#9ca3af', marginBottom: 32, fontSize: 16 }}>
             Join thousands of customers already using TrimBook to manage their salon experience.

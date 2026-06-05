@@ -115,7 +115,7 @@ export default function BookingPage() {
             ].map(([label, val]) => (
               <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #1f1f1f', fontSize: 14, gap: 12 }}>
                 <span style={{ color: '#9ca3af', flexShrink: 0 }}>{label}</span>
-                <span style={{ fontWeight: 600, color: label === 'Total' ? '#c9a84c' : '#f5f5f5', textAlign: 'right' }}>{val}</span>
+                <span style={{ fontWeight: 600, color: label === 'Total' ? '#e879a0' : '#f5f5f5', textAlign: 'right' }}>{val}</span>
               </div>
             ))}
           </div>
@@ -147,14 +147,14 @@ export default function BookingPage() {
                 <div style={{
                   width: 32, height: 32, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontWeight: 700, fontSize: 13, transition: 'all 0.3s',
-                  background: i < step ? '#c9a84c' : i === step ? '#c9a84c' : '#2a2a2a',
+                  background: i < step ? '#e879a0' : i === step ? '#e879a0' : '#2a2a2a',
                   color: i <= step ? '#0f0f0f' : '#9ca3af',
                 }}>
                   {i < step ? '✓' : i + 1}
                 </div>
-                <span style={{ fontSize: 11, color: i <= step ? '#c9a84c' : '#6b7280', marginTop: 6, fontWeight: 600 }}>{s}</span>
+                <span style={{ fontSize: 11, color: i <= step ? '#e879a0' : '#6b7280', marginTop: 6, fontWeight: 600 }}>{s}</span>
               </div>
-              {i < STEPS.length - 1 && <div style={{ height: 2, flex: 1, background: i < step ? '#c9a84c' : '#2a2a2a', marginBottom: 18 }} />}
+              {i < STEPS.length - 1 && <div style={{ height: 2, flex: 1, background: i < step ? '#e879a0' : '#2a2a2a', marginBottom: 18 }} />}
             </div>
           ))}
         </div>
@@ -175,15 +175,15 @@ export default function BookingPage() {
                   <div key={s.id} onClick={() => toggleService(s)}
                     style={{
                       padding: '14px 16px', borderRadius: 10, border: '2px solid', cursor: 'pointer', transition: 'all 0.2s',
-                      borderColor: on ? '#c9a84c' : '#2a2a2a',
-                      background: on ? 'rgba(201,168,76,0.08)' : '#111',
+                      borderColor: on ? '#e879a0' : '#2a2a2a',
+                      background: on ? 'rgba(232,121,160,0.08)' : '#111',
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                       <div style={{
                         width: 22, height: 22, borderRadius: 6, border: '2px solid', flexShrink: 0,
-                        borderColor: on ? '#c9a84c' : '#4a4a4a',
-                        background: on ? '#c9a84c' : 'transparent',
+                        borderColor: on ? '#e879a0' : '#4a4a4a',
+                        background: on ? '#e879a0' : 'transparent',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: 12, color: '#0f0f0f', fontWeight: 800,
                       }}>
@@ -194,7 +194,7 @@ export default function BookingPage() {
                         <p style={{ color: '#9ca3af', fontSize: 13, marginTop: 2 }}>⏱ {s.duration} min</p>
                       </div>
                     </div>
-                    <span style={{ color: on ? '#c9a84c' : '#9ca3af', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>£{s.price}</span>
+                    <span style={{ color: on ? '#e879a0' : '#9ca3af', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>£{s.price}</span>
                   </div>
                 )
               })}
@@ -209,7 +209,7 @@ export default function BookingPage() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: 13, color: '#9ca3af' }}>Total:</span>
-                  <span style={{ color: '#c9a84c', fontWeight: 800, fontSize: 20 }}>£{totalPrice.toLocaleString()}</span>
+                  <span style={{ color: '#e879a0', fontWeight: 800, fontSize: 20 }}>£{totalPrice.toLocaleString()}</span>
                 </div>
               </div>
             )}
@@ -225,7 +225,7 @@ export default function BookingPage() {
           <div className="card">
             <h2 style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}>Choose Date & Time</h2>
             <p style={{ color: '#9ca3af', fontSize: 13, marginBottom: 20 }}>
-              {staff.name} works on: <span style={{ color: '#c9a84c', fontWeight: 600 }}>{workingDays}</span>
+              {staff.name} works on: <span style={{ color: '#e879a0', fontWeight: 600 }}>{workingDays}</span>
             </p>
             <div style={{ marginBottom: 20 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: '#d1d5db', display: 'block', marginBottom: 8 }}>Select Date</label>
@@ -245,9 +245,9 @@ export default function BookingPage() {
                     <button key={t} onClick={() => setSelected(p => ({ ...p, time: t }))}
                       style={{
                         padding: '9px 8px', borderRadius: 8, border: '1px solid', cursor: 'pointer', fontSize: 13, fontWeight: 500, transition: 'all 0.2s',
-                        borderColor: selected.time === t ? '#c9a84c' : '#2a2a2a',
-                        background: selected.time === t ? 'rgba(201,168,76,0.1)' : '#111',
-                        color: selected.time === t ? '#c9a84c' : '#9ca3af',
+                        borderColor: selected.time === t ? '#e879a0' : '#2a2a2a',
+                        background: selected.time === t ? 'rgba(232,121,160,0.1)' : '#111',
+                        color: selected.time === t ? '#e879a0' : '#9ca3af',
                       }}>
                       {t}
                     </button>
@@ -304,7 +304,7 @@ export default function BookingPage() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', fontSize: 14 }}>
                 <span style={{ color: '#9ca3af' }}>Total</span>
-                <span style={{ fontWeight: 800, color: '#c9a84c', fontSize: 18 }}>£{totalPrice.toLocaleString()}</span>
+                <span style={{ fontWeight: 800, color: '#e879a0', fontSize: 18 }}>£{totalPrice.toLocaleString()}</span>
               </div>
 
               {selected.note && (
@@ -313,7 +313,7 @@ export default function BookingPage() {
                 </div>
               )}
             </div>
-            <div style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: 8, padding: 12, fontSize: 13, color: '#c9a84c', marginBottom: 20 }}>
+            <div style={{ background: 'rgba(232,121,160,0.08)', border: '1px solid rgba(232,121,160,0.2)', borderRadius: 8, padding: 12, fontSize: 13, color: '#e879a0', marginBottom: 20 }}>
               ℹ Payment is made in-person at the salon. You'll receive confirmation from your stylist shortly.
             </div>
             <div style={{ display: 'flex', gap: 10 }}>

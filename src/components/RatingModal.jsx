@@ -57,13 +57,13 @@ export default function RatingModal({ booking, onClose }) {
               onClick={() => setRating(i)}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(0)}
-              style={{ fontSize: 40, cursor: 'pointer', color: i <= (hovered || rating) ? '#c9a84c' : '#2a2a2a', transition: 'color 0.15s' }}>
+              style={{ fontSize: 40, cursor: 'pointer', color: i <= (hovered || rating) ? '#e879a0' : '#2a2a2a', transition: 'color 0.15s' }}>
               ★
             </span>
           ))}
         </div>
         {rating > 0 && (
-          <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
+          <p style={{ textAlign: 'center', color: '#e879a0', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>
             {['','Poor','Fair','Good','Great','Excellent!'][rating]}
           </p>
         )}

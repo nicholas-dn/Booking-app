@@ -26,7 +26,7 @@ export default function UserDashboard() {
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, marginBottom: 32 }}>
           {[
-            { label: 'Upcoming', value: upcoming.length, icon: '📅', color: '#c9a84c' },
+            { label: 'Upcoming', value: upcoming.length, icon: '📅', color: '#e879a0' },
             { label: 'Completed', value: completed.length, icon: '✅', color: '#22c55e' },
             { label: 'Cancelled', value: cancelled.length, icon: '❌', color: '#ef4444' },
             { label: 'Total', value: bookings.length, icon: '📊', color: '#3b82f6' },
@@ -52,7 +52,7 @@ export default function UserDashboard() {
         <div className="card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <h3 style={{ fontWeight: 700 }}>Upcoming Appointments ({upcoming.length})</h3>
-            <Link to="/my-bookings" style={{ color: '#c9a84c', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
+            <Link to="/my-bookings" style={{ color: '#e879a0', fontSize: 13, textDecoration: 'none', fontWeight: 600 }}>View all →</Link>
           </div>
           {upcoming.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '32px 0', color: '#9ca3af' }}>

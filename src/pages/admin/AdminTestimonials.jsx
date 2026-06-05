@@ -2,7 +2,7 @@ import Sidebar from '../../components/Sidebar'
 import { useBooking } from '../../context/BookingContext'
 
 function Stars({ rating }) {
-  return <span>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= rating ? '#c9a84c' : '#2a2a2a', fontSize: 14 }}>★</span>)}</span>
+  return <span>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= rating ? '#e879a0' : '#2a2a2a', fontSize: 14 }}>★</span>)}</span>
 }
 
 export default function AdminTestimonials() {
@@ -24,7 +24,7 @@ export default function AdminTestimonials() {
           <h1 style={{ fontSize: 24, fontWeight: 800, color: '#fff' }}>Reviews & Testimonials</h1>
           <p style={{ color: '#9ca3af', marginTop: 4 }}>
             Approve reviews and choose which ones appear on the landing page.
-            <span style={{ color: '#c9a84c', fontWeight: 600 }}> {onLanding.length}</span> currently shown on homepage.
+            <span style={{ color: '#e879a0', fontWeight: 600 }}> {onLanding.length}</span> currently shown on homepage.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default function AdminTestimonials() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {approved.map(r => (
-                <div key={r.id} className="card" style={{ borderColor: r.showOnLanding ? 'rgba(201,168,76,0.4)' : '#2a2a2a' }}>
+                <div key={r.id} className="card" style={{ borderColor: r.showOnLanding ? 'rgba(232,121,160,0.4)' : '#2a2a2a' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
@@ -91,9 +91,9 @@ export default function AdminTestimonials() {
                       <button onClick={() => toggleShowOnLanding(r.id)}
                         style={{
                           padding: '7px 14px', fontSize: 12, borderRadius: 8, border: '2px solid', cursor: 'pointer', fontWeight: 600, transition: 'all 0.2s',
-                          borderColor: r.showOnLanding ? '#c9a84c' : '#2a2a2a',
-                          background: r.showOnLanding ? 'rgba(201,168,76,0.1)' : '#111',
-                          color: r.showOnLanding ? '#c9a84c' : '#9ca3af',
+                          borderColor: r.showOnLanding ? '#e879a0' : '#2a2a2a',
+                          background: r.showOnLanding ? 'rgba(232,121,160,0.1)' : '#111',
+                          color: r.showOnLanding ? '#e879a0' : '#9ca3af',
                         }}>
                         {r.showOnLanding ? '📌 Remove from Homepage' : '📌 Show on Homepage'}
                       </button>

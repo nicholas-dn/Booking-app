@@ -6,7 +6,7 @@ export default function Footer() {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 40, marginBottom: 40 }}>
           <div>
-            <div style={{ fontSize: 22, fontWeight: 800, color: '#c9a84c', marginBottom: 12 }}>✂ TrimBook</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#e879a0', marginBottom: 12 }}>✂ TrimBook</div>
             <p style={{ color: '#9ca3af', fontSize: 14, lineHeight: 1.7 }}>
               The premium booking platform for salons, barbers, and hairdressers across Nigeria.
             </p>
